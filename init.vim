@@ -177,6 +177,7 @@ set colorcolumn=81
 " highlight cursor position
 set cursorline
 " set cursorcolumn
+set scrolloff=5
 
 " Make it so that we always go to the last position we were at
 " in the buffer when we were last in it.
