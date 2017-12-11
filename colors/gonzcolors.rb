@@ -27,5 +27,5 @@ vim_colors "gonzcolors" do
   link :elixirTupleDelimiter, :to => :Delimiter
   link :elixirMapDelimiter, :to => :Delimiter
 
-  Todo "cc4"
+  Todo "cc4" # NeomakeWarning is linked to this.
 end
