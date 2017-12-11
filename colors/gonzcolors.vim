@@ -18,14 +18,22 @@ if has("gui_running")
     set background=dark
 endif
 
-hi Normal     guifg=#999999 ctermfg=246  guibg=#111111 ctermbg=232  gui=NONE cterm=NONE
-hi Comment    guifg=#555555 ctermfg=87   gui=NONE cterm=NONE
-hi Statement  guifg=#8888CC ctermfg=164  gui=NONE cterm=NONE
-hi Delimiter  guifg=#882255 ctermfg=160  gui=NONE cterm=NONE
-hi Type       guifg=#339933 ctermfg=65   gui=NONE cterm=NONE
-hi Constant   guifg=#44AA44 ctermfg=15   gui=NONE cterm=NONE
-hi Identifier guifg=#8888CC ctermfg=104  gui=NONE cterm=NONE
-hi LineNr     guifg=#AA0000 ctermfg=124  gui=NONE cterm=NONE
+hi Normal      guifg=#999999 ctermfg=246  guibg=#111111 ctermbg=233  gui=NONE cterm=NONE
+hi Comment     guifg=#555555 ctermfg=240  gui=NONE cterm=NONE
+hi Statement   guifg=#8888CC ctermfg=104  gui=NONE cterm=NONE
+hi PreProc     guifg=#CC44AA ctermfg=169  gui=NONE cterm=NONE
+hi Delimiter   guifg=#882255 ctermfg=89   gui=NONE cterm=NONE
+hi Type        guifg=#339933 ctermfg=65   gui=NONE cterm=NONE
+hi Constant    guifg=#44BB44 ctermfg=71   gui=NONE cterm=NONE
+hi Identifier  guifg=#8888CC ctermfg=104  gui=NONE cterm=NONE
+hi LineNr      guifg=#AA0000 ctermfg=124  gui=NONE cterm=NONE
+hi DiffDelete  guifg=#0A0A0A ctermfg=232  guibg=#CC0000 ctermbg=160  gui=NONE cterm=NONE
+hi DiffAdd     guifg=#0A0A0A ctermfg=232  guibg=#00CC00 ctermbg=40   gui=NONE cterm=NONE
+hi DiffChange  guifg=#0A0A0A ctermfg=232  guibg=#CC00CC ctermbg=164  gui=NONE cterm=NONE
+hi DiffText    guifg=#000000 ctermfg=16   guibg=#FFFFFF ctermbg=231  gui=NONE cterm=NONE
+hi ColorColumn guifg=#222222 ctermfg=235  guibg=#222222 ctermbg=235  gui=NONE cterm=NONE
+hi CursorLine  guifg=#CCCCCC ctermfg=252  guibg=#222222 ctermbg=235  gui=NONE cterm=NONE
+hi elixirId    guifg=#994488 ctermfg=96   guibg=#111111 ctermbg=233  gui=NONE cterm=NONE
 
-" Erlang
-hi Function guifg=NONE    ctermfg=15   gui=NONE cterm=NONE
+hi link elixirTupleDelimiter Delimiter
+hi link elixirMapDelimiter   Delimiter

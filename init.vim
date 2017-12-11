@@ -102,6 +102,8 @@ Plug 'Reewr/vim-monokai-phoenix'
 Plug 'zacanger/angr.vim'
 Plug 'nightsense/vimspectr'
 
+Plug 'gerw/vim-HiLinkTrace'
+
 Plug 'elixir-editors/vim-elixir'
 
 " auto-format for elixir
@@ -136,7 +138,7 @@ set background=dark
 syntax enable
 filetype plugin indent on
 "set termguicolors
-colorscheme jellybeans
+colorscheme gonzcolors
 
 " Sane tabs
 " - Two spaces wide
