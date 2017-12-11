@@ -33,7 +33,7 @@ Plug 'neomake/neomake'
         \ }
   
   let g:neomake_open_list = 2
-  let g:neomake_highlight_lines = 1
+  let g:neomake_highlight_lines = 0
 
 Plug 'ludovicchabant/vim-gutentags'
 let g:gutentags_cache_dir = '~/.tags_cache'
@@ -175,7 +175,7 @@ map <CR> :noh<CR>
 set colorcolumn=81
 
 " highlight cursor position
-set cursorline
+" set cursorline
 " set cursorcolumn
 set scrolloff=5
 
