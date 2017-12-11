@@ -6,12 +6,6 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   " use tab for completion
   inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 Plug 'neomake/neomake'
-  " Run Neomake when I save any buffer
-  augroup localneomake
-    autocmd! BufWritePost * Neomake
-  augroup END
-  " Don't tell me to use smartquotes in markdown ok?
-  let g:neomake_markdown_enabled_makers = []
     " Configure a nice credo setup, courtesy https://github.com/neomake/neomake/pull/300
   let g:neomake_elixir_enabled_makers = ['mix', 'mycredo']
   function! NeomakeCredoErrorType(entry)
@@ -37,6 +31,9 @@ Plug 'neomake/neomake'
         \ 'errorformat': '[%t] %. %f:%l:%c %m,[%t] %. %f:%l %m',
         \ 'postprocess': function('NeomakeCredoErrorType')
         \ }
+  
+  let g:neomake_open_list = 2
+  let g:neomake_highlight_lines = 1
 
 Plug 'ludovicchabant/vim-gutentags'
 let g:gutentags_cache_dir = '~/.tags_cache'
@@ -48,6 +45,9 @@ Plug 'justinmk/vim-sneak'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 Plug 'kien/ctrlp.vim'
 " Borrowed from @skwp
@@ -76,25 +76,67 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#branch#displayed_head_limit = 17
 set laststatus=2
 
+" File browsing, enhanced netrw
+Plug 'tpope/vim-vinegar'
+
+" Jump to last position when reopening files
+Plug 'farmergreg/vim-lastplace'
+
 " Dlang
-Plug 'landaire/deoplete-d'
+" Plug 'landaire/deoplete-d'
 
 " Go
-Plug 'fatih/vim-go'
-au BufWritePost *.go GoImports
-let g:go_auto_type_info = 1
+" Plug 'fatih/vim-go'
+" au BufWritePost *.go GoImports
+" let g:go_auto_type_info = 1
 
 " Colorscheme
 Plug 'morhetz/gruvbox'
+Plug 'jacoborus/tender.vim'
+Plug 'liuchengxu/space-vim-dark'
+Plug 'fcpg/vim-orbital'
+Plug 'dikiaap/minimalist'
+Plug 'christophermca/meta5'
+Plug 'nanotech/jellybeans.vim'
+Plug 'Reewr/vim-monokai-phoenix'
+Plug 'zacanger/angr.vim'
+Plug 'nightsense/vimspectr'
+
+Plug 'elixir-editors/vim-elixir'
+
+" auto-format for elixir
+Plug 'mhinz/vim-mix-format'
+let g:mix_format_on_save = 0
+let g:mix_format_elixir_bin_path = '~/.exenv/versions/master/bin'
+
+" org-mode
+Plug 'tpope/vim-speeddating'
+Plug 'mattn/calendar-vim'
+Plug 'jceb/vim-orgmode'
+
+Plug 'scrooloose/nerdtree'
+
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" Clojure
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
+Plug 'clojure-vim/acid.nvim'
+
+" Racket
+" Plug 'wlangstroth/vim-racket'
+" Plug 'MicahElliott/vrod'
+
 call plug#end()
 
 set mouse=""
 
 " Colorscheme
-colorscheme gruvbox
 set background=dark
 syntax enable
 filetype plugin indent on
+"set termguicolors
+colorscheme jellybeans
 
 " Sane tabs
 " - Two spaces wide
@@ -164,8 +206,14 @@ map <Leader>ev :vsp %%
 map <Leader>es :sp %%
 
 " Ack bind
-map <Leader>/ :Ack 
-map <Leader>* :Ack <c-r>=expand("<cword>")<cr>
+map <Leader>/ :Ag 
+map <Leader>* :Ag <c-r>=expand("<cword>")<cr>
+
+" Fzf
+map <leader>ff :GFiles<cr>
+map <leader>fF :GFiles!<cr>
+map <leader>bb :Buffers<cr>
+map <leader>bB :Buffers!<cr>
 
 " Map tilde (above TAB) to exit insert mode and visual mode
 " For some reason it will actually press enter when trying to exit
@@ -184,3 +232,8 @@ omap <Leader><Leader> <Plug>Sneak_s
 " Set higher updaterate
 set updatetime=50
 
+call neomake#configure#automake('w')
+
+" Elixir `Mix Format`
+nmap <localleader>f :MixFormat<CR>
+nmap <localleader>d :MixFormatDiff<CR>
