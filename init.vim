@@ -210,8 +210,10 @@ map <Leader>/ :Ag
 map <Leader>* :Ag <c-r>=expand("<cword>")<cr>
 
 " Fzf
-map <leader>ff :GFiles<cr>
-map <leader>fF :GFiles!<cr>
+map <leader>ff :Files<cr>
+map <leader>fF :Files!<cr>
+map <leader>gf :GFiles<cr>
+map <leader>gF :GFiles!<cr>
 map <leader>bb :Buffers<cr>
 map <leader>bB :Buffers!<cr>
 
