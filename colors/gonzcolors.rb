@@ -18,11 +18,14 @@ vim_colors "gonzcolors" do
   DiffAdd "0a0a0a", "0c0"
   DiffChange "0a0a0a", "c0c"
   DiffText "000", "fff"
-  ColorColumn "222", "222"
+  ColorColumn "999", "222"
   CursorLine "ccc", "222"
+  MatchParen "000", "c3c"
 
   elixirId "948", "111"
 
   link :elixirTupleDelimiter, :to => :Delimiter
   link :elixirMapDelimiter, :to => :Delimiter
+
+  Todo "cc4"
 end
