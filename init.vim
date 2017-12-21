@@ -86,9 +86,13 @@ Plug 'farmergreg/vim-lastplace'
 " Plug 'landaire/deoplete-d'
 
 " Go
-" Plug 'fatih/vim-go'
-" au BufWritePost *.go GoImports
-" let g:go_auto_type_info = 1
+Plug 'fatih/vim-go'
+Plug 'zchee/deoplete-go', { 'do': 'make'}
+au BufWritePost *.go GoImports
+au FileType go nmap <leader>rt <Plug>(go-run-tab)
+au FileType go nmap <leader>rs <Plug>(go-run-split)
+au FileType go nmap <leader>rv <Plug>(go-run-vertical)
+let g:go_auto_type_info = 1
 
 " Colorscheme
 Plug 'morhetz/gruvbox'
@@ -128,6 +132,12 @@ Plug 'clojure-vim/acid.nvim'
 " Racket
 " Plug 'wlangstroth/vim-racket'
 " Plug 'MicahElliott/vrod'
+
+" Idris
+Plug 'idris-hackers/idris-vim'
+
+" Gotodef open in new tab
+Plug 'ipod825/vim-tagjump'
 
 call plug#end()
 
@@ -242,3 +252,6 @@ call neomake#configure#automake('w')
 " Elixir `Mix Format`
 nmap <localleader>f :MixFormat<CR>
 nmap <localleader>d :MixFormatDiff<CR>
+
+" Goto definition in new tab for Elixir
+nmap <localleader>t :tabnew %<CR>:ExDef<CR>
