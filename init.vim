@@ -254,4 +254,4 @@ nmap <localleader>f :MixFormat<CR>
 nmap <localleader>d :MixFormatDiff<CR>
 
 " Goto definition in new tab for Elixir
-nmap <localleader>t :tabnew %<CR>:ExDef<CR>
+nnoremap <localleader>t mx :tabnew %<CR>`x :ExDef<CR>
