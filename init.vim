@@ -1,39 +1,50 @@
 call plug#begin('~/.config/nvim/plugged')
 
+" Language server
+Plug 'autozimu/LanguageClient-neovim', {
+  \ 'branch': 'next',
+  \ 'do': 'bash install.sh',
+  \ }
+
+let g:LanguageClient_serverCommands = {
+  \ 'elixir': ['~/tools/elixir-ls/language_server.sh']
+  \ }
+
+
 " Plugins
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   let g:deoplete#enable_at_startup = 1
   " use tab for completion
   inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-Plug 'neomake/neomake'
-    " Configure a nice credo setup, courtesy https://github.com/neomake/neomake/pull/300
-  let g:neomake_elixir_enabled_makers = ['mix', 'mycredo']
-  function! NeomakeCredoErrorType(entry)
-    if a:entry.type ==# 'F'      " Refactoring opportunities
-      let l:type = 'W'
-    elseif a:entry.type ==# 'D'  " Software design suggestions
-      let l:type = 'I'
-    elseif a:entry.type ==# 'W'  " Warnings
-      let l:type = 'W'
-    elseif a:entry.type ==# 'R'  " Readability suggestions
-      let l:type = 'I'
-    elseif a:entry.type ==# 'C'  " Convention violation
-      let l:type = 'W'
-    else
-      let l:type = 'M'           " Everything else is a message
-    endif
-    let a:entry.type = l:type
-  endfunction
-
-  let g:neomake_elixir_mycredo_maker = {
-        \ 'exe': 'mix',
-        \ 'args': ['credo', 'list', '%:p', '--format=oneline'],
-        \ 'errorformat': '[%t] %. %f:%l:%c %m,[%t] %. %f:%l %m',
-        \ 'postprocess': function('NeomakeCredoErrorType')
-        \ }
-  
-  let g:neomake_open_list = 2
-  let g:neomake_highlight_lines = 0
+"Plug 'neomake/neomake'
+"    " Configure a nice credo setup, courtesy https://github.com/neomake/neomake/pull/300
+"  let g:neomake_elixir_enabled_makers = ['mix', 'mycredo']
+"  function! NeomakeCredoErrorType(entry)
+"    if a:entry.type ==# 'F'      " Refactoring opportunities
+"      let l:type = 'W'
+"    elseif a:entry.type ==# 'D'  " Software design suggestions
+"      let l:type = 'I'
+"    elseif a:entry.type ==# 'W'  " Warnings
+"      let l:type = 'W'
+"    elseif a:entry.type ==# 'R'  " Readability suggestions
+"      let l:type = 'I'
+"    elseif a:entry.type ==# 'C'  " Convention violation
+"      let l:type = 'W'
+"    else
+"      let l:type = 'M'           " Everything else is a message
+"    endif
+"    let a:entry.type = l:type
+"  endfunction
+"
+"  let g:neomake_elixir_mycredo_maker = {
+"        \ 'exe': 'mix',
+"        \ 'args': ['credo', 'list', '%:p', '--format=oneline'],
+"        \ 'errorformat': '[%t] %. %f:%l:%c %m,[%t] %. %f:%l %m',
+"        \ 'postprocess': function('NeomakeCredoErrorType')
+"        \ }
+"  
+"  let g:neomake_open_list = 2
+"  let g:neomake_highlight_lines = 0
 
 Plug 'ludovicchabant/vim-gutentags'
 let g:gutentags_cache_dir = '~/.tags_cache'
@@ -45,6 +56,9 @@ Plug 'justinmk/vim-sneak'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-unimpaired'
+
+Plug 'airblade/vim-gitgutter'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -66,7 +80,7 @@ endif
 
 let g:ctrlp_working_path_mode = 0
 
-Plug 'slashmili/alchemist.vim'
+" Plug 'slashmili/alchemist.vim'
 
 Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -86,13 +100,13 @@ Plug 'farmergreg/vim-lastplace'
 " Plug 'landaire/deoplete-d'
 
 " Go
-Plug 'fatih/vim-go'
-Plug 'zchee/deoplete-go', { 'do': 'make'}
-au BufWritePost *.go GoImports
-au FileType go nmap <leader>rt <Plug>(go-run-tab)
-au FileType go nmap <leader>rs <Plug>(go-run-split)
-au FileType go nmap <leader>rv <Plug>(go-run-vertical)
-let g:go_auto_type_info = 1
+"Plug 'fatih/vim-go'
+"Plug 'zchee/deoplete-go', { 'do': 'make'}
+"au BufWritePost *.go GoImports
+"au FileType go nmap <leader>rt <Plug>(go-run-tab)
+"au FileType go nmap <leader>rs <Plug>(go-run-split)
+"au FileType go nmap <leader>rv <Plug>(go-run-vertical)
+"let g:go_auto_type_info = 1
 
 " Colorscheme
 Plug 'morhetz/gruvbox'
@@ -105,15 +119,11 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'Reewr/vim-monokai-phoenix'
 Plug 'zacanger/angr.vim'
 Plug 'nightsense/vimspectr'
+Plug 'whatyouhide/vim-gotham'
 
 Plug 'gerw/vim-HiLinkTrace'
 
 Plug 'elixir-editors/vim-elixir'
-
-" auto-format for elixir
-Plug 'mhinz/vim-mix-format'
-let g:mix_format_on_save = 0
-let g:mix_format_elixir_bin_path = '~/.exenv/versions/master/bin'
 
 " org-mode
 Plug 'tpope/vim-speeddating'
@@ -128,13 +138,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'guns/vim-sexp'
 Plug 'tpope/vim-sexp-mappings-for-regular-people'
 Plug 'clojure-vim/acid.nvim'
-
-" Racket
-" Plug 'wlangstroth/vim-racket'
-" Plug 'MicahElliott/vrod'
-
-" Idris
-Plug 'idris-hackers/idris-vim'
 
 " Gotodef open in new tab
 Plug 'ipod825/vim-tagjump'
@@ -181,8 +184,8 @@ set smartcase
 " Stop highlighting on Enter
 map <CR> :noh<CR>
 
-" Set highlight for column 81
-set colorcolumn=81
+" Set highlight for column 100
+set colorcolumn=100
 
 " highlight cursor position
 " set cursorline
@@ -247,11 +250,15 @@ omap <Leader><Leader> <Plug>Sneak_s
 " Set higher updaterate
 set updatetime=50
 
-call neomake#configure#automake('w')
+"call neomake#configure#automake('w')
 
 " Elixir `Mix Format`
 nmap <localleader>f :MixFormat<CR>
 nmap <localleader>d :MixFormatDiff<CR>
 
-" Goto definition in new tab for Elixir
-nnoremap <localleader>t mx :tabnew %<CR>`x :ExDef<CR>
+" Language server bindings
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+
+" Goto definition in new tab for language server
+nnoremap <localleader>t mx :tabnew %<CR>`x :call LanguageClient_textDocument_definition()<CR>
