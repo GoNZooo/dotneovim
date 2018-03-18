@@ -241,6 +241,11 @@ nmap <localleader>d :MixFormatDiff<CR>
 " Language server bindings
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <localleader>= :call LanguageClient_textDocument_formatting()<CR>
+nnoremap <silent> <localleader>s :call LanguageClient_textDocument_documentSymbol()<CR>
+nnoremap <silent> <localleader>S :call LanguageClient_workspace_symbol()<CR>
+nnoremap <silent> <localleader>r :call LanguageClient_textDocument_references()<CR>
+nnoremap <silent> <localleader>R :call LanguageClient_textDocument_rename()<CR>
 
 " Goto definition in new tab for language server
 nnoremap <localleader>t mx :tabnew %<CR>`x :call LanguageClient_textDocument_definition()<CR>
