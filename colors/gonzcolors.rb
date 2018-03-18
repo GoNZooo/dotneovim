@@ -5,7 +5,7 @@ vim_colors "gonzcolors" do
 	reset true
 	background :dark
 
-	Normal "999", "111" 
+	Normal "999", "050505" 
 	Comment "555"
 	Statement "88c"
   PreProc "c4a"

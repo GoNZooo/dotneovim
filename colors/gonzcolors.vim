@@ -18,7 +18,7 @@ if has("gui_running")
     set background=dark
 endif
 
-hi Normal      guifg=#999999 ctermfg=246  guibg=#111111 ctermbg=233  gui=NONE cterm=NONE
+hi Normal      guifg=#999999 ctermfg=246  guibg=#050505 ctermbg=232  gui=NONE cterm=NONE
 hi Comment     guifg=#555555 ctermfg=240  gui=NONE cterm=NONE
 hi Statement   guifg=#8888CC ctermfg=104  gui=NONE cterm=NONE
 hi PreProc     guifg=#CC44AA ctermfg=169  gui=NONE cterm=NONE
