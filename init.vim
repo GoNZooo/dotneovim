@@ -130,9 +130,9 @@ Plug 'tpope/vim-speeddating'
 Plug 'mattn/calendar-vim'
 Plug 'jceb/vim-orgmode'
 
-Plug 'scrooloose/nerdtree'
-
-Plug 'Xuyuanp/nerdtree-git-plugin'
+"Plug 'scrooloose/nerdtree'
+"
+"Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Clojure
 Plug 'guns/vim-sexp'
