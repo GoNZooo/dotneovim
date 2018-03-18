@@ -31,9 +31,11 @@ hi DiffDelete  guifg=#0A0A0A ctermfg=232  guibg=#CC0000 ctermbg=160  gui=NONE ct
 hi DiffAdd     guifg=#0A0A0A ctermfg=232  guibg=#00CC00 ctermbg=40   gui=NONE cterm=NONE
 hi DiffChange  guifg=#0A0A0A ctermfg=232  guibg=#CC00CC ctermbg=164  gui=NONE cterm=NONE
 hi DiffText    guifg=#000000 ctermfg=16   guibg=#FFFFFF ctermbg=231  gui=NONE cterm=NONE
-hi ColorColumn guifg=#222222 ctermfg=235  guibg=#222222 ctermbg=235  gui=NONE cterm=NONE
+hi ColorColumn guifg=#999999 ctermfg=246  guibg=#222222 ctermbg=235  gui=NONE cterm=NONE
 hi CursorLine  guifg=#CCCCCC ctermfg=252  guibg=#222222 ctermbg=235  gui=NONE cterm=NONE
+hi MatchParen  guifg=#000000 ctermfg=16   guibg=#CC33CC ctermbg=170  gui=NONE cterm=NONE
 hi elixirId    guifg=#994488 ctermfg=96   guibg=#111111 ctermbg=233  gui=NONE cterm=NONE
+hi Todo        guifg=#CCCC44 ctermfg=185  gui=NONE cterm=NONE
 
 hi link elixirTupleDelimiter Delimiter
 hi link elixirMapDelimiter   Delimiter
