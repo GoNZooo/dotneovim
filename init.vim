@@ -63,27 +63,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-Plug 'kien/ctrlp.vim'
-" Borrowed from @skwp
-if executable('ag')
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command =
-    \ 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-else
-  " Fall back to using git ls-files if Ag is not available
-  let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
-endif
-
-let g:ctrlp_working_path_mode = 0
-
 " Plug 'slashmili/alchemist.vim'
 
 Plug 'powerman/vim-plugin-AnsiEsc'
-Plug 'ctrlpvim/ctrlp.vim'
 
 Plug 'bling/vim-airline'
 let g:airline_powerline_fonts = 1
