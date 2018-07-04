@@ -22,10 +22,14 @@ vim_colors "gonzcolors" do
   CursorLine "ccc", "222"
   MatchParen "000", "c3c"
 
-  elixirId "948", "111"
+  #elixirId "948", "111"
 
   link :elixirTupleDelimiter, :to => :Delimiter
   link :elixirMapDelimiter, :to => :Delimiter
 
   Todo "cc4" # NeomakeWarning is linked to this.
+
+  # autocomplete menu
+  Pmenu "fff", "444"
+  PmenuSel "444", "fff"
 end
