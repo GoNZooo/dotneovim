@@ -49,12 +49,12 @@ Plug 'airblade/vim-gitgutter'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+let g:fzf_buffers_jump = 1
 
 Plug 'powerman/vim-plugin-AnsiEsc'
 
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
-      \ 'colorscheme': 'one',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
@@ -69,6 +69,8 @@ set laststatus=2
 
 " File browsing, enhanced netrw
 Plug 'tpope/vim-vinegar'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Jump to last position when reopening files
 Plug 'farmergreg/vim-lastplace'
@@ -82,6 +84,7 @@ Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'joshdick/onedark.vim'
 Plug 'mhartington/oceanic-next'
 Plug 'iCyMind/NeoSolarized'
+Plug 'chriskempson/base16-vim'
 
 Plug 'gerw/vim-HiLinkTrace'
 
@@ -103,7 +106,7 @@ set background=dark
 syntax enable
 filetype plugin indent on
 set termguicolors
-colorscheme NeoSolarized
+colorscheme gonzcolors
 
 " Sane tabs
 " - Two spaces wide
@@ -182,8 +185,8 @@ map <leader>ff :Files<cr>
 map <leader>fF :Files!<cr>
 map <leader>gf :GFiles<cr>
 map <leader>gF :GFiles!<cr>
-map <leader>bb :Windows<cr>
-map <leader>bB :Windows!<cr>
+map <leader>bb :Buffers<cr>
+map <leader>bB :Buffers!<cr>
 map <leader>cf :Commits<cr>
 map <leader>cF :Commits!<cr>
 
