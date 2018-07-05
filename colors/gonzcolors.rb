@@ -32,4 +32,8 @@ vim_colors "gonzcolors" do
   # autocomplete menu
   Pmenu "fff", "444"
   PmenuSel "444", "fff"
+
+  # ALE
+  ALEWarning "000", "ffa500"
+  ALEError "000", "ff2500"
 end
