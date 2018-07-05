@@ -21,6 +21,7 @@ vim_colors "gonzcolors" do
   ColorColumn "999", "222"
   CursorLine "ccc", "222"
   MatchParen "000", "c3c"
+  Search "fff", "00a"
 
   #elixirId "948", "111"
 
