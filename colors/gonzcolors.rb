@@ -23,11 +23,6 @@ vim_colors "gonzcolors" do
   MatchParen "000", "c3c"
   Search "fff", "00a"
 
-  #elixirId "948", "111"
-
-  link :elixirTupleDelimiter, :to => :Delimiter
-  link :elixirMapDelimiter, :to => :Delimiter
-
   Todo "cc4" # NeomakeWarning is linked to this.
 
   # autocomplete menu
@@ -37,4 +32,12 @@ vim_colors "gonzcolors" do
   # ALE
   ALEWarning "000", "ffa500"
   ALEError "000", "ff2500"
+
+  # Language specific
+
+  ##########
+  # Elixir #
+  ##########
+  link :elixirTupleDelimiter, :to => :Delimiter
+  link :elixirMapDelimiter, :to => :Delimiter
 end

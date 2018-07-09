@@ -11,7 +11,8 @@ let g:LanguageClient_serverCommands = {
   \ 'haskell': ['hie-wrapper', '--lsp'],
   \ 'ocaml': ['ocaml-language-server', '--stdio'],
   \ 'reason': ['ocaml-language-server', '--stdio'],
-  \ 'json': ['json-languageserver', '--stdio']
+  \ 'json': ['json-languageserver', '--stdio'],
+  \ 'javascript': ['javascript-typescript-stdio'],
   \ }
 
 let g:LanguageClient_hoverPreview = "Always"
@@ -27,7 +28,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'neovimhaskell/haskell-vim'
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'w0rp/ale'
-let g:ale_linters = {'haskell': [], 'elixir': []}
+let g:ale_linters = {'haskell': [], 'elixir': [], 'javascript': []}
 
 "Plug 'ludovicchabant/vim-gutentags'
 "let g:gutentags_cache_dir = '~/.tags_cache'
@@ -97,6 +98,9 @@ Plug 'jceb/vim-orgmode'
 
 " creole
 Plug 'vim-scripts/vim-creole'
+
+" nix
+Plug 'LnL7/vim-nix'
 call plug#end()
 
 set mouse=""
@@ -105,7 +109,12 @@ set mouse=""
 set background=dark
 syntax enable
 filetype plugin indent on
-set termguicolors
+
+" only enables termguicolors if we are not running urxvt
+if $TERM != 'rxvt-unicode-256color'
+  set termguicolors
+endif
+
 colorscheme gonzcolors
 
 " Sane tabs
