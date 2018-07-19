@@ -120,7 +120,7 @@ if $TERM != 'rxvt-unicode-256color'
   set termguicolors
 endif
 
-colorscheme gonzcolors
+colorscheme gonz-aurora
 
 " Sane tabs
 " - Two spaces wide
