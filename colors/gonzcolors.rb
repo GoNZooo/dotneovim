@@ -5,10 +5,10 @@ vim_colors "gonzcolors" do
 	reset true
 	background :dark
 
-	Normal "999", "050505" 
-	Comment "555"
-	Statement "88c"
-  PreProc "c4a"
+	Normal "bbb", "0a0a0a" 
+	Comment "777"
+	Statement "bb6acb"
+  PreProc "c44"
 	Delimiter "825"
 	Type "393"
 	Constant "4b4"
@@ -30,14 +30,21 @@ vim_colors "gonzcolors" do
   PmenuSel "444", "fff"
 
   # ALE
-  ALEWarning "000", "ffa500"
-  ALEError "000", "ff2500"
+  link :ALEWarning, :to => :Underlined
+  link :ALEError, :to => :Underlined
 
   # Language specific
 
   ##########
   # Elixir #
   ##########
+  link :elixirKeyword, :to => :Statement
+  link :elixirBlock, :to => :elixirKeyword
+  link :elixirBlockDefinition, :to => :elixirKeyword
+  link :elixirDefine, :to => :elixirKeyword
   link :elixirTupleDelimiter, :to => :Delimiter
   link :elixirMapDelimiter, :to => :Delimiter
+
+  # OCaml #
+  ocamlConstructor "47f"
 end
