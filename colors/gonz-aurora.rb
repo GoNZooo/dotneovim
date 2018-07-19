@@ -16,7 +16,7 @@ vim_colors "gonzcolors" do
 	String "ffb700"
   Function "c5e400"
 	Identifier "88c"
-	LineNr "a00"
+	LineNr "444"
   DiffDelete "0a0a0a", "c00"
   DiffAdd "0a0a0a", "0c0"
   DiffChange "0a0a0a", "c0c"
@@ -45,6 +45,7 @@ vim_colors "gonzcolors" do
   link :elixirInclude, :to => :elixirKeyword
   link :elixirModuleDefine, :to => :elixirKeyword
   link :elixirPrivateDefine, :to => :elixirKeyword
+  link :elixirStructDefine, :to => :elixirKeyword
   link :elixirBlock, :to => :elixirKeyword
   link :elixirBlockDefinition, :to => :elixirKeyword
   link :elixirDefine, :to => :elixirKeyword
