@@ -10,7 +10,7 @@ vim_colors "gonzcolors" do
 	Statement "bb6acb"
   PreProc "c44"
 	Delimiter "825"
-	Type "393"
+	Type "47f"
 	Constant "4b4"
 	Identifier "88c"
 	LineNr "a00"
@@ -46,5 +46,5 @@ vim_colors "gonzcolors" do
   link :elixirMapDelimiter, :to => :Delimiter
 
   # OCaml #
-  ocamlConstructor "47f"
+  link :ocamlConstructor, :to => :Type
 end
