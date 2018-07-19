@@ -21,7 +21,7 @@ vim_colors "gonzcolors" do
   DiffAdd "0a0a0a", "0c0"
   DiffChange "0a0a0a", "c0c"
   DiffText "000", "fff"
-  ColorColumn "000", "111"
+  ColorColumn "000", "33313e"
   CursorLine "ccc", "222"
   MatchParen "000", "c3c"
   Search "fff", "00a"
