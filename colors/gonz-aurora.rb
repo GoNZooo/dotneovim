@@ -25,6 +25,7 @@ vim_colors "gonzcolors" do
   CursorLine "ccc", "222"
   MatchParen "000", "c3c"
   Search "fff", "00a"
+  Visual "000", "7b26cb"
 
   Todo "cc4" # NeomakeWarning is linked to this.
 

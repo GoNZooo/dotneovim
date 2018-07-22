@@ -38,6 +38,7 @@ hi ColorColumn guifg=#ECECEC ctermfg=255  guibg=#33313E ctermbg=236  gui=NONE ct
 hi CursorLine  guifg=#CCCCCC ctermfg=252  guibg=#222222 ctermbg=235  gui=NONE cterm=NONE
 hi MatchParen  guifg=#000000 ctermfg=16   guibg=#CC33CC ctermbg=170  gui=NONE cterm=NONE
 hi Search      guifg=#FFFFFF ctermfg=231  guibg=#0000AA ctermbg=19   gui=NONE cterm=NONE
+hi Visual      guifg=#000000 ctermfg=16   guibg=#7B26CB ctermbg=92   gui=NONE cterm=NONE
 hi Todo        guifg=#CCCC44 ctermfg=185  gui=NONE cterm=NONE
 hi Pmenu       guifg=#FFFFFF ctermfg=231  guibg=#444444 ctermbg=238  gui=NONE cterm=NONE
 hi PmenuSel    guifg=#444444 ctermfg=238  guibg=#FFFFFF ctermbg=231  gui=NONE cterm=NONE
