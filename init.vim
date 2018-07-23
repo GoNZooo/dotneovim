@@ -34,7 +34,7 @@ let g:ale_linters = {'haskell': [], 'elixir': [], 'javascript': []}
 "let g:gutentags_cache_dir = '~/.tags_cache'
 
 Plug 'mileszs/ack.vim'
-let g:ackprg = 'ag -S --nogroup --column'
+let g:ackprg = 'rg --smart-case --vimgrep'
 
 "Plug 'justinmk/vim-sneak'
 Plug 'easymotion/vim-easymotion'
