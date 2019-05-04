@@ -7,13 +7,13 @@ Plug 'autozimu/LanguageClient-neovim', {
   \ }
 
 let g:LanguageClient_serverCommands = {
-  \ 'elixir': ['~/tools/elixir-ls/language_server.sh'],
-  \ 'haskell': ['hie-wrapper', '--lsp'],
-  \ 'ocaml': ['ocaml-language-server', '--stdio'],
-  \ 'reason': ['ocaml-language-server', '--stdio'],
-  \ 'json': ['json-languageserver', '--stdio'],
-  \ 'javascript': ['javascript-typescript-stdio'],
+  \ 'elixir': ['~/tools/elixir-ls/language_server.sh']
   \ }
+  " \ 'ocaml': ['ocaml-language-server', '--stdio'],
+  " \ 'reason': ['ocaml-language-server', '--stdio'],
+  " \ 'json': ['json-languageserver', '--stdio'],
+  " \ 'javascript': ['javascript-typescript-stdio'],
+  " \ 'haskell': ['hie-wrapper', '--lsp']
 
 let g:LanguageClient_hoverPreview = "Always"
 
@@ -27,8 +27,24 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Haskell
 Plug 'neovimhaskell/haskell-vim'
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
+" Don't automatically show buffer for GHCID; use terminal instead
+let g:ghcid_background = 1
 Plug 'w0rp/ale'
-let g:ale_linters = {'haskell': [], 'elixir': [], 'javascript': []}
+let g:ale_linters = {'haskell': ['hlint'], 'elixir': [], 'javascript': []}
+" let g:ale_haskell_ghc_options = '-fno-code -v0 -isrc'
+" Plug 'parsonsmatt/intero-neovim'
+" Plug 'neomake/neomake'
+" Intero starts automatically. Set this if you'd like to prevent that.
+" let g:intero_start_immediately = 1
+
+" Enable type information on hover (when holding cursor at point for ~1 second).
+" let g:intero_type_on_hover = 0
+
+" Change the intero window size; default is 10.
+" let g:intero_window_size = 80
+
+" Sets the intero window to split vertically; default is horizontal
+" let g:intero_vertical_split = 1
 
 "Plug 'ludovicchabant/vim-gutentags'
 "let g:gutentags_cache_dir = '~/.tags_cache'
@@ -191,10 +207,12 @@ map <Leader>ev :vsp %%
 map <Leader>es :sp %%
 
 " Ack bind
-map <Leader>/ :Ag 
-map <Leader>* :Ag <c-r>=expand("<cword>")<cr>
+map <Leader>/ :Rg 
+map <Leader>* :Rg <c-r>=expand("<cword>")<cr>
 
 " Fzf
+map <C-p> :Files<cr>
+map <C-g> :GFiles?<cr>
 map <leader>ff :Files<cr>
 map <leader>fF :Files!<cr>
 map <leader>gf :GFiles<cr>
@@ -222,16 +240,19 @@ set ttimeoutlen=0
 set switchbuf=usetab
 
 " Language server bindings
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <localleader>= :call LanguageClient_textDocument_formatting()<CR>
-nnoremap <silent> <localleader>s :call LanguageClient_textDocument_documentSymbol()<CR>
-nnoremap <silent> <localleader>S :call LanguageClient_workspace_symbol()<CR>
-nnoremap <silent> <localleader>r :call LanguageClient_textDocument_references()<CR>
-nnoremap <silent> <localleader>R :call LanguageClient_textDocument_rename()<CR>
+augroup language_server_protocol
+  nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+  nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+  nnoremap <silent> <localleader>= :call LanguageClient_textDocument_formatting()<CR>
+  nnoremap <silent> <localleader>s :call LanguageClient_textDocument_documentSymbol()<CR>
+  nnoremap <silent> <localleader>S :call LanguageClient_workspace_symbol()<CR>
+  nnoremap <silent> <localleader>r :call LanguageClient_textDocument_references()<CR>
+  nnoremap <silent> <localleader>R :call LanguageClient_textDocument_rename()<CR>
 
-" Goto definition in new tab for language server
-nnoremap <silent> <localleader>t :call LanguageClient_textDocument_definition({'gotoCmd': 'tabedit'})<CR>
+  " Goto definition in new tab for language server
+  nnoremap <silent> <localleader>t :call LanguageClient_textDocument_definition({'gotoCmd': 'tabedit'})<CR>
+augroup END
+
 autocmd BufNewFile,BufRead *.wiki setfiletype creole
 
 function! AdHocSnippet(language, snippet)
@@ -245,3 +266,32 @@ inoremap %led <Esc>^"ld$:call AdHocSnippet("elixir", "logger_debug")<CR>j^f,"lP
 inoremap %lei <Esc>^"ld$:call AdHocSnippet("elixir", "logger_info")<CR>j^f,"lP
 inoremap %lew <Esc>^"ld$:call AdHocSnippet("elixir", "logger_warn")<CR>j^f,"lP
 inoremap %lee <Esc>^"ld$:call AdHocSnippet("elixir", "logger_error")<CR>j^f,"lP
+
+" haskell bindings
+augroup filetype_haskell
+  " autocmd FileType haskell nnoremap <silent> K :InteroGenericType<CR>
+  " autocmd FileType haskell nnoremap <silent> gd :InteroGoToDef<CR>
+  " autocmd FileType haskell nnoremap <silent> <leader>il :InteroLoadCurrentFile<CR>
+  " autocmd FileType haskell nnoremap <silent> <leader>im :InteroLoadCurrentModule<CR>
+  " autocmd FileType haskell nnoremap <silent> <leader>io :InteroOpen<CR>
+  " autocmd FileType haskell nnoremap <silent> <leader>ih :InteroHide<CR>
+  " autocmd FileType haskell nnoremap <silent> <leader>ir :InteroReload<CR>
+  " autocmd FileType haskell nnoremap <silent> <leader>it :InteroInsertType<CR>
+  " autocmd FileType haskell nnoremap <leader>ist :InteroSetTargets<CR>
+  " autocmd FileType haskell nnoremap <silent> <leader>ict :InteroClearTargets<CR>
+  autocmd FileType haskell nnoremap <silent> <localleader>= :!hindent %<CR>
+  autocmd FileType haskell nnoremap <silent> <leader>= :!stylish-haskell -i %<CR>
+augroup END
+
+augroup vimrc_appearance | autocmd!
+	autocmd ColorScheme * call s:vimrc_postcolorscheme()
+augroup END
+function! s:vimrc_postcolorscheme()
+	" Configure gutter sign colours
+	highlight GutterSignAdd    guifg=#009900 ctermfg=2
+	highlight GutterSignChange guifg=#bbbb00 ctermfg=3
+	highlight GutterSignDelete guifg=#ff2222 ctermfg=1
+endfunction
+highlight link GitGutterAdd    GutterSignAdd
+highlight link GitGutterChange GutterSignChange
+highlight link GitGutterDelete GutterSignDelete
