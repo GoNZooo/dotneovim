@@ -198,33 +198,34 @@ cnoremap %% <C-R>=fnameescape(expand('%:p:h'))."/"<CR>
 " %rc expands to vimrc
 cnoremap %rc ~/.config/nvim/init.vim
 
-map <Leader>cd :lcd %:p:h<CR>
+map <leader>cd :lcd %:p:h<CR>
 
 " Useful bindings for opening new files
 " Current window
-map <Leader>ew :e %%
+map <leader>ew :e %%
 " New tab
-map <Leader>et :tabe %%
+map <leader>et :tabe %%
 " New window from vertical split
-map <Leader>ev :vsp %%
+map <leader>ev :vsp %%
 " New window from horizontal split
-map <Leader>es :sp %%
+map <leader>es :sp %%
 
-" Ack bind
-map <Leader>/ :Rg 
-map <Leader>* :Rg <c-r>=expand("<cword>")<cr>
+" RG with fzf binds
+map <leader>/ :Rg 
+map <leader>* :Rg <c-r>=expand("<cword>")<CR>
 
 " Fzf
-map <C-p> :Files<cr>
-map <C-g> :GFiles?<cr>
-map <leader>ff :Files<cr>
-map <leader>fF :Files!<cr>
-map <leader>gf :GFiles<cr>
-map <leader>gF :GFiles!<cr>
-map <leader>bb :Buffers<cr>
-map <leader>bB :Buffers!<cr>
-map <leader>cf :Commits<cr>
-map <leader>cF :Commits!<cr>
+map <C-p> :Files<CR>
+map <C-g> :GFiles?<CR>
+map <leader>ff :Files<CR>
+map <leader>fF :Files!<CR>
+map <leader>gf :GFiles<CR>
+map <leader>gF :GFiles!<CR>
+map <C-b> :Buffers<CR>
+map <leader>bb :Buffers<CR>
+map <leader>bB :Buffers!<CR>
+map <leader>cf :Commits<CR>
+map <leader>cF :Commits!<CR>
 
 " Map tilde (above TAB) to exit insert mode and visual mode
 " For some reason it will actually press enter when trying to exit
@@ -234,7 +235,7 @@ imap § <Esc>
 vmap § <Esc>
 
 " Use easymotion
-nmap <Leader>s <Plug>(easymotion-s2)
+nmap <leader>s <Plug>(easymotion-s2)
 map / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 
