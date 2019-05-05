@@ -27,6 +27,10 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Haskell
 Plug 'neovimhaskell/haskell-vim'
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
+Plug 'alx741/vim-hindent'
+Plug 'alx741/vim-stylishask'
+let g:hindent_on_save = 0
+let g:stylishask_on_save = 0
 " Don't automatically show buffer for GHCID; use terminal instead
 let g:ghcid_background = 1
 Plug 'w0rp/ale'
@@ -267,6 +271,18 @@ inoremap %lei <Esc>^"ld$:call AdHocSnippet("elixir", "logger_info")<CR>j^f,"lP
 inoremap %lew <Esc>^"ld$:call AdHocSnippet("elixir", "logger_warn")<CR>j^f,"lP
 inoremap %lee <Esc>^"ld$:call AdHocSnippet("elixir", "logger_error")<CR>j^f,"lP
 
+
+" Helper function, called below with mappings
+" Taken from https://blog.jez.io/haskell-development-with-neovim/
+function! HaskellFormat(which) abort
+  if a:which ==# 'hindent' || a:which ==# 'both'
+    :Hindent
+  endif
+  if a:which ==# 'stylish' || a:which ==# 'both'
+    :Stylishask
+  endif
+endfunction
+
 " haskell bindings
 augroup filetype_haskell
   " autocmd FileType haskell nnoremap <silent> K :InteroGenericType<CR>
@@ -279,8 +295,9 @@ augroup filetype_haskell
   " autocmd FileType haskell nnoremap <silent> <leader>it :InteroInsertType<CR>
   " autocmd FileType haskell nnoremap <leader>ist :InteroSetTargets<CR>
   " autocmd FileType haskell nnoremap <silent> <leader>ict :InteroClearTargets<CR>
-  autocmd FileType haskell nnoremap <silent> <localleader>= :!hindent %<CR>
-  autocmd FileType haskell nnoremap <silent> <leader>= :!stylish-haskell -i %<CR>
+  autocmd FileType haskell nnoremap <localleader>i :call HaskellFormat('hindent')<CR>
+  autocmd FileType haskell nnoremap <localleader>= :call HaskellFormat('both')<CR>
+  autocmd FileType haskell nnoremap <leader>= :call HaskellFormat('stylish')<CR>
 augroup END
 
 augroup vimrc_appearance | autocmd!
