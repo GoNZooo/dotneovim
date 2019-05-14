@@ -12,14 +12,14 @@ if version > 580
     endif
 endif
 
-let colors_name="gonzcolors"
+let colors_name="gonz-aurora"
 
 if has("gui_running")
     set background=dark
 endif
 
 hi Normal      guifg=#ECECEC ctermfg=255  guibg=#23212E ctermbg=235  gui=NONE cterm=NONE
-hi Comment     guifg=#777777 ctermfg=243  gui=NONE cterm=NONE
+hi Comment     guifg=#46F2F2 ctermfg=87   gui=NONE cterm=NONE
 hi Statement   guifg=#E12977 ctermfg=162  gui=NONE cterm=NONE
 hi Include     guifg=#C5E400 ctermfg=184  gui=NONE cterm=NONE
 hi PreProc     guifg=#CC4444 ctermfg=167  gui=NONE cterm=NONE

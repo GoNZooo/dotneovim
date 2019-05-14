@@ -1,14 +1,17 @@
 call plug#begin('~/.config/nvim/plugged')
 
 " Language server
-Plug 'autozimu/LanguageClient-neovim', {
-  \ 'branch': 'next',
-  \ 'do': 'bash install.sh',
-  \ }
+" Plug 'autozimu/LanguageClient-neovim', {
+"   \ 'branch': 'next',
+"   \ 'do': 'bash install.sh',
+"   \ }
 
-let g:LanguageClient_serverCommands = {
-  \ 'elixir': ['~/tools/elixir-ls/language_server.sh']
-  \ }
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+
+" let g:LanguageClient_serverCommands = {
+"   \ 'elixir': ['~/tools/elixir-ls/language_server.sh'],
+"   \ 'purescript': ['purescript-language-server', '--stdio', '--log', './psc-ide-log']
+"   \ }
   " \ 'ocaml': ['ocaml-language-server', '--stdio'],
   " \ 'reason': ['ocaml-language-server', '--stdio'],
   " \ 'json': ['json-languageserver', '--stdio'],
@@ -23,6 +26,9 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   let g:deoplete#auto_complete_start_length = 2
   " use tab for completion
   inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+" PureScript
+Plug 'purescript-contrib/purescript-vim'
 
 " Haskell
 Plug 'neovimhaskell/haskell-vim'
@@ -126,6 +132,11 @@ Plug 'vim-scripts/vim-creole'
 
 " nix
 Plug 'LnL7/vim-nix'
+
+" TypeScript
+Plug 'leafgarland/typescript-vim'
+Plug 'ianks/vim-tsx'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 call plug#end()
 
 set mouse=""
@@ -210,22 +221,21 @@ map <leader>ev :vsp %%
 " New window from horizontal split
 map <leader>es :sp %%
 
-" RG with fzf binds
-map <leader>/ :Rg 
-map <leader>* :Rg <c-r>=expand("<cword>")<CR>
-
 " Fzf
 map <C-p> :Files<CR>
-map <C-g> :GFiles?<CR>
+map <C-g> :GFiles<CR>
 map <leader>ff :Files<CR>
 map <leader>fF :Files!<CR>
 map <leader>gf :GFiles<CR>
 map <leader>gF :GFiles!<CR>
-map <C-b> :Buffers<CR>
+map <leader>gc :GFiles?<CR>
+"map <C-b> :Buffers<CR>
 map <leader>bb :Buffers<CR>
 map <leader>bB :Buffers!<CR>
 map <leader>cf :Commits<CR>
 map <leader>cF :Commits!<CR>
+map <leader>/ :Rg 
+map <leader>* :Rg <c-r>=expand("<cword>")<CR>
 
 " Map tilde (above TAB) to exit insert mode and visual mode
 " For some reason it will actually press enter when trying to exit
@@ -244,18 +254,25 @@ set updatetime=50
 set ttimeoutlen=0
 set switchbuf=usetab
 
+" Loading project specific config
+set exrc
+set secure
+
 " Language server bindings
 augroup language_server_protocol
-  nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-  nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-  nnoremap <silent> <localleader>= :call LanguageClient_textDocument_formatting()<CR>
-  nnoremap <silent> <localleader>s :call LanguageClient_textDocument_documentSymbol()<CR>
-  nnoremap <silent> <localleader>S :call LanguageClient_workspace_symbol()<CR>
-  nnoremap <silent> <localleader>r :call LanguageClient_textDocument_references()<CR>
-  nnoremap <silent> <localleader>R :call LanguageClient_textDocument_rename()<CR>
+  inoremap <silent><expr> <c-space> coc#refresh()
+  nnoremap <silent> K :call CocAction('doHover')<CR>
+  nmap <silent> gd <Plug>(coc-definition)
+  nnoremap <silent> <localleader>r <Plug>(coc-references)
+  nnoremap <silent> <localleader>= :call CocAction('format')<CR>
+  nnoremap <silent> <localleader>, <Plug>(coc-codeaction)
 
+  " nnoremap <silent> <localleader>s :call LanguageClient_textDocument_documentSymbol()<CR>
+  " nnoremap <silent> <localleader>S :call LanguageClient_workspace_symbol()<CR>
+  " nnoremap <silent> <localleader>R :call LanguageClient_textDocument_rename()<CR>
+  nmap <localleader>R <Plug>(coc-rename)
   " Goto definition in new tab for language server
-  nnoremap <silent> <localleader>t :call LanguageClient_textDocument_definition({'gotoCmd': 'tabedit'})<CR>
+  " nnoremap <silent> <localleader>t :call LanguageClient_textDocument_definition({'gotoCmd': 'tabedit'})<CR>
 augroup END
 
 autocmd BufNewFile,BufRead *.wiki setfiletype creole
@@ -284,32 +301,48 @@ function! HaskellFormat(which) abort
   endif
 endfunction
 
+augroup filetype_prettier
+  autocmd FileType typescript nnoremap <buffer> <localleader>= :Prettier<CR>
+  autocmd FileType typescript.tsx nnoremap <buffer> <localleader>= :Prettier<CR>
+  autocmd FileType javascript.jsx nnoremap <buffer> <localleader>= :Prettier<CR>
+  autocmd FileType html nnoremap <buffer> <localleader>= :Prettier<CR>
+  autocmd FileType yaml nnoremap <buffer> <localleader>= :Prettier<CR>
+
+  let g:prettier#config#print_width = 100
+  let g:prettier#config#tab_width = 2
+  let g:prettier#config#single_quote = 'false'
+  let g:prettier#config#trailing_comma = 'es5'
+  let g:prettier#config#arrow_parens = 'always'
+  let g:prettier#config#bracket_spacing = 'true'
+augroup END
+
 " haskell bindings
 augroup filetype_haskell
-  " autocmd FileType haskell nnoremap <silent> K :InteroGenericType<CR>
-  " autocmd FileType haskell nnoremap <silent> gd :InteroGoToDef<CR>
-  " autocmd FileType haskell nnoremap <silent> <leader>il :InteroLoadCurrentFile<CR>
-  " autocmd FileType haskell nnoremap <silent> <leader>im :InteroLoadCurrentModule<CR>
-  " autocmd FileType haskell nnoremap <silent> <leader>io :InteroOpen<CR>
-  " autocmd FileType haskell nnoremap <silent> <leader>ih :InteroHide<CR>
-  " autocmd FileType haskell nnoremap <silent> <leader>ir :InteroReload<CR>
-  " autocmd FileType haskell nnoremap <silent> <leader>it :InteroInsertType<CR>
-  " autocmd FileType haskell nnoremap <leader>ist :InteroSetTargets<CR>
-  " autocmd FileType haskell nnoremap <silent> <leader>ict :InteroClearTargets<CR>
-  autocmd FileType haskell nnoremap <localleader>i :call HaskellFormat('hindent')<CR>
-  autocmd FileType haskell nnoremap <localleader>= :call HaskellFormat('both')<CR>
-  autocmd FileType haskell nnoremap <leader>= :call HaskellFormat('stylish')<CR>
+  " autocmd FileType haskell nnoremap <buffer> <silent> K :InteroGenericType<CR>
+  " autocmd FileType haskell nnoremap <buffer> <silent> gd :InteroGoToDef<CR>
+  " autocmd FileType haskell nnoremap <buffer> <silent> <leader>il :InteroLoadCurrentFile<CR>
+  " autocmd FileType haskell nnoremap <buffer> <silent> <leader>im :InteroLoadCurrentModule<CR>
+  " autocmd FileType haskell nnoremap <buffer> <silent> <leader>io :InteroOpen<CR>
+  " autocmd FileType haskell nnoremap <buffer> <silent> <leader>ih :InteroHide<CR>
+  " autocmd FileType haskell nnoremap <buffer> <silent> <leader>ir :InteroReload<CR>
+  " autocmd FileType haskell nnoremap <buffer> <silent> <leader>it :InteroInsertType<CR>
+  " autocmd FileType haskell nnoremap <buffer> <leader>ist :InteroSetTargets<CR>
+  " autocmd FileType haskell nnoremap <buffer> <silent> <leader>ict :InteroClearTargets<CR>
+  autocmd FileType haskell nnoremap <buffer> <localleader>i :call HaskellFormat('hindent')<CR>
+  autocmd FileType haskell nnoremap <buffer> <localleader>= :call HaskellFormat('both')<CR>
+  autocmd FileType haskell nnoremap <buffer> <leader>= :call HaskellFormat('stylish')<CR>
+  autocmd FileType haskell nnoremap <buffer> <C-s> :Tags<CR>
+  autocmd FileType haskell nmap <buffer> gd <C-]>
+  set tags=codex.tags,tags
 augroup END
 
 augroup vimrc_appearance | autocmd!
 	autocmd ColorScheme * call s:vimrc_postcolorscheme()
 augroup END
-function! s:vimrc_postcolorscheme()
-	" Configure gutter sign colours
-	highlight GutterSignAdd    guifg=#009900 ctermfg=2
-	highlight GutterSignChange guifg=#bbbb00 ctermfg=3
-	highlight GutterSignDelete guifg=#ff2222 ctermfg=1
-endfunction
+
+highlight GutterSignAdd    guifg=#009900 ctermfg=2
+highlight GutterSignChange guifg=#bbbb00 ctermfg=3
+highlight GutterSignDelete guifg=#ff2222 ctermfg=1
 highlight link GitGutterAdd    GutterSignAdd
 highlight link GitGutterChange GutterSignChange
 highlight link GitGutterDelete GutterSignDelete

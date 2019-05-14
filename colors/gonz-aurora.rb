@@ -1,4 +1,4 @@
-vim_colors "gonzcolors" do
+vim_colors "gonz-aurora" do
 	author "Rickard Andersson"
 	notes "gonz' color scheme"
 
@@ -6,7 +6,7 @@ vim_colors "gonzcolors" do
 	background :dark
 
 	Normal "ececec", "23212e" 
-	Comment "777"
+	Comment "46f2f2"
 	Statement "e12977"
   Include "c5e400"
   PreProc "c44"
