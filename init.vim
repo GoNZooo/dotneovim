@@ -1,17 +1,50 @@
 call plug#begin('~/.config/nvim/plugged')
 
 " Language server
-" Plug 'autozimu/LanguageClient-neovim', {
-"   \ 'branch': 'next',
-"   \ 'do': 'bash install.sh',
-"   \ }
+Plug 'autozimu/LanguageClient-neovim', {
+  \ 'branch': 'next',
+  \ 'do': 'bash install.sh',
+  \ }
 
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+let g:LanguageClient_useVirtualText = 0
 
-" let g:LanguageClient_serverCommands = {
-"   \ 'elixir': ['~/tools/elixir-ls/language_server.sh'],
-"   \ 'purescript': ['purescript-language-server', '--stdio', '--log', './psc-ide-log']
-"   \ }
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+let g:LanguageClient_serverCommands = {
+  \ 'elixir': ['~/tools/elixir-ls/language_server.sh'],
+  \ }
+
+let g:LanguageClient_diagnosticsDisplay = {
+ \    1: {
+ \        "name": "Error",
+ \        "texthl": "ALEError",
+ \        "signText": ">",
+ \        "signTexthl": "ALEErrorSign",
+ \        "virtualTexthl": "Error",
+ \    },
+ \    2: {
+ \        "name": "Warning",
+ \        "texthl": "ALEWarning",
+ \        "signText": "-",
+ \        "signTexthl": "ALEWarningSign",
+ \        "virtualTexthl": "Todo",
+ \    },
+ \    3: {
+ \        "name": "Information",
+ \        "texthl": "ALEInfo",
+ \        "signText": "i",
+ \        "signTexthl": "ALEInfoSign",
+ \        "virtualTexthl": "Todo",
+ \    },
+ \    4: {
+ \        "name": "Hint",
+ \        "texthl": "ALEInfo",
+ \        "signText": "h",
+ \        "signTexthl": "ALEInfoSign",
+ \        "virtualTexthl": "Todo",
+ \    },
+ \}
+  " \ 'purescript': ['purescript-language-server', '--stdio', '--log', './psc-ide-log']
   " \ 'ocaml': ['ocaml-language-server', '--stdio'],
   " \ 'reason': ['ocaml-language-server', '--stdio'],
   " \ 'json': ['json-languageserver', '--stdio'],
@@ -260,19 +293,22 @@ set secure
 
 " Language server bindings
 augroup language_server_protocol
-  inoremap <silent><expr> <c-space> coc#refresh()
-  nnoremap <silent> K :call CocAction('doHover')<CR>
-  nmap <silent> gd <Plug>(coc-definition)
-  nnoremap <silent> <localleader>r <Plug>(coc-references)
-  nnoremap <silent> <localleader>= :call CocAction('format')<CR>
-  nnoremap <silent> <localleader>, <Plug>(coc-codeaction)
+  " inoremap <silent><expr> <c-space> coc#refresh()
+  " nnoremap <silent> K :call CocAction('doHover')<CR>
+  " nmap <silent> gd <Plug>(coc-definition)
+  " nmap <silent> <leader>ep <Plug>(coc-diagnostic-prev)
+  " nmap <silent> <leader>en <Plug>(coc-diagnostic-next)
+  " nnoremap <silent> <localleader>r <Plug>(coc-references)
+  " nnoremap <silent> <localleader>= :call CocAction('format')<CR>
+  " nnoremap <silent> <localleader>, <Plug>(coc-codeaction)
+  " nmap <localleader>R <Plug>(coc-rename)
 
-  " nnoremap <silent> <localleader>s :call LanguageClient_textDocument_documentSymbol()<CR>
-  " nnoremap <silent> <localleader>S :call LanguageClient_workspace_symbol()<CR>
-  " nnoremap <silent> <localleader>R :call LanguageClient_textDocument_rename()<CR>
-  nmap <localleader>R <Plug>(coc-rename)
+  nnoremap <silent> <localleader>s :call LanguageClient_textDocument_documentSymbol()<CR>
+  nnoremap <silent> <localleader>S :call LanguageClient_workspace_symbol()<CR>
+  nnoremap <silent> <localleader>R :call LanguageClient_textDocument_rename()<CR>
+  nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
   " Goto definition in new tab for language server
-  " nnoremap <silent> <localleader>t :call LanguageClient_textDocument_definition({'gotoCmd': 'tabedit'})<CR>
+  nnoremap <silent> <localleader>t :call LanguageClient_textDocument_definition({'gotoCmd': 'tabedit'})<CR>
 augroup END
 
 autocmd BufNewFile,BufRead *.wiki setfiletype creole
