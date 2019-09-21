@@ -1,4 +1,4 @@
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin('C:\Users\ricka\code\vim\dotneovim\plugged')
 
 " Language server
 " Plug 'autozimu/LanguageClient-neovim', {
@@ -6,29 +6,30 @@ call plug#begin('~/.config/nvim/plugged')
 "   \ 'do': 'bash install.sh',
 "   \ }
 
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+" Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
 " let g:LanguageClient_serverCommands = {
 "   \ 'elixir': ['~/tools/elixir-ls/language_server.sh'],
 "   \ 'purescript': ['purescript-language-server', '--stdio', '--log', './psc-ide-log']
 "   \ }
-  " \ 'ocaml': ['ocaml-language-server', '--stdio'],
-  " \ 'reason': ['ocaml-language-server', '--stdio'],
-  " \ 'json': ['json-languageserver', '--stdio'],
-  " \ 'javascript': ['javascript-typescript-stdio'],
-  " \ 'haskell': ['hie-wrapper', '--lsp']
+"   \ 'ocaml': ['ocaml-language-server', '--stdio'],
+"   \ 'reason': ['ocaml-language-server', '--stdio'],
+"   \ 'json': ['json-languageserver', '--stdio'],
+"   \ 'javascript': ['javascript-typescript-stdio'],
+"   \ 'haskell': ['hie-wrapper', '--lsp']
 
-let g:LanguageClient_hoverPreview = "Always"
+" let g:LanguageClient_hoverPreview = "Always"
 
 " Plugins
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   let g:deoplete#enable_at_startup = 1
   let g:deoplete#auto_complete_start_length = 2
+  let g:deoplete#python3_host_prog = 'python3.exe'
   " use tab for completion
   inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " PureScript
-Plug 'purescript-contrib/purescript-vim'
+" Plug 'purescript-contrib/purescript-vim'
 
 " Haskell
 Plug 'neovimhaskell/haskell-vim'
@@ -40,7 +41,7 @@ let g:stylishask_on_save = 0
 " Don't automatically show buffer for GHCID; use terminal instead
 let g:ghcid_background = 1
 Plug 'w0rp/ale'
-let g:ale_linters = {'haskell': ['hlint'], 'elixir': [], 'javascript': []}
+let g:ale_linters = {'haskell': ['hlint'], 'elixir': [], 'javascript': [], 'zig': ['zigbuild']}
 " let g:ale_haskell_ghc_options = '-fno-code -v0 -isrc'
 " Plug 'parsonsmatt/intero-neovim'
 " Plug 'neomake/neomake'
@@ -62,14 +63,16 @@ let g:ale_linters = {'haskell': ['hlint'], 'elixir': [], 'javascript': []}
 Plug 'mileszs/ack.vim'
 let g:ackprg = 'rg --smart-case --vimgrep'
 
-"Plug 'justinmk/vim-sneak'
-Plug 'easymotion/vim-easymotion'
-Plug 'jiangmiao/auto-pairs'
+" Plugins from the Lord of Vim 
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
+
+"Plug 'justinmk/vim-sneak'
+Plug 'easymotion/vim-easymotion'
+Plug 'jiangmiao/auto-pairs'
 Plug 'int3/vim-extradite'
 
 Plug 'airblade/vim-gitgutter'
@@ -131,15 +134,92 @@ Plug 'jceb/vim-orgmode'
 Plug 'vim-scripts/vim-creole'
 
 " nix
-Plug 'LnL7/vim-nix'
+" Plug 'LnL7/vim-nix'
 
 " TypeScript
 Plug 'leafgarland/typescript-vim'
 Plug 'ianks/vim-tsx'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+
+" zig
+let g:zig_fmt_autosave = 0
+Plug 'ziglang/zig.vim'
+
 call plug#end()
 
-set mouse=""
+set guifont=Consolas:h15
+
+" if has('gui_vmrc')
+"   source ginit.vim
+" endif
+
+" zig ALE linter by fubd @ FreeNode
+" Author: Kevin Watters <kevinwatters@gmail.com>
+" Description: This file adds support for checking zig code.
+"
+
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_zig_compiler = "zig"
+
+function! ZigGetExecutable(buffer) abort
+    return g:ale_zig_compiler
+endfunction
+
+function! s:find_build_dir(direc, count) abort
+    let l:path = a:direc . "/build.zig"
+    if filereadable(l:path)
+        return a:direc
+    else
+        if a:count < 10
+            return s:find_build_dir(expand(a:direc . "../"), a:count + 1)
+        endif
+    endif 
+
+    return "."
+endif
+
+endfunction
+
+function! ZigGetCommand(buffer) abort
+    let l:buf_direc = expand('%:h')
+    let l:direc = s:find_build_dir(l:buf_direc, 0)
+
+    return 'cd ' . direc . ' && ' . fnameescape(ZigGetExecutable(a:buffer))
+    \   . ' build --verbose'
+endfunction
+
+function! ZigHandleZigCompilerCheck(buffer, lines) abort
+    " Regular expression to match messages:
+    " They look like:
+    "
+    " C:\Users\Foo\src\myproject\src\main.zig:24:4: error: invalid token: '.'
+    "
+    let l:pattern = '\v([^\(]+):(\d+):(\d+): error: (.*)$'
+
+    let l:output = [] " For each match, update the l:output list:
+
+    for l:match in ale#util#GetMatches(a:lines, l:pattern)
+        call add(l:output, {
+        \   'filename': expand(l:match[1]),
+        \   'lnum': str2nr(l:match[2]),
+        \   'col': str2nr(l:match[3]),
+        \   'text': l:match[4],
+        \   'type': 'E'
+        \})
+    endfor
+
+    return l:output
+endfunction
+
+call ale#linter#Define('zig', {
+\   'name': 'zigbuild',
+\   'executable_callback': 'ZigGetExecutable',
+\   'command_callback': 'ZigGetCommand',
+\   'callback': 'ZigHandleZigCompilerCheck',
+\   'output_stream': 'both'
+\})
+
+"set mouse=""
 
 " Colorscheme
 set background=dark
@@ -207,7 +287,8 @@ if has("autocmd")
 " See: http://vimcasts.org/episodes/the-edit-command/
 cnoremap %% <C-R>=fnameescape(expand('%:p:h'))."/"<CR>
 " %rc expands to vimrc
-cnoremap %rc ~/.config/nvim/init.vim
+cnoremap %rc C:/Users/ricka/AppData/Local/nvim/init.vim
+cnoremap %code C:/Users/ricka/code
 
 map <leader>cd :lcd %:p:h<CR>
 
@@ -260,17 +341,20 @@ set secure
 
 " Language server bindings
 augroup language_server_protocol
-  inoremap <silent><expr> <c-space> coc#refresh()
-  nnoremap <silent> K :call CocAction('doHover')<CR>
-  nmap <silent> gd <Plug>(coc-definition)
-  nnoremap <silent> <localleader>r <Plug>(coc-references)
-  nnoremap <silent> <localleader>= :call CocAction('format')<CR>
-  nnoremap <silent> <localleader>, <Plug>(coc-codeaction)
-
+  " inoremap <silent><expr> <c-space> coc#refresh()
+  " nnoremap <silent> K :call CocAction('doHover')<CR>
+  " nmap <silent> gd <Plug>(coc-definition)
+  " nmap <silent> <localleader>r <Plug>(coc-references)
+  " nmap <silent> <localleader>= :call CocAction('format')<CR>
+  " nmap <silent> <localleader>, <Plug>(coc-codeaction)
+  " nmap <silent> <leader>ep <Plug>(coc-diagnostic-prev)
+  " nmap <silent> <leader>en <Plug>(coc-diagnostic-next)
+  " nmap <silent> <leader>el :CocList diagnostics<CR>
+  " nmap <localleader>R <Plug>(coc-rename)
+  "
   " nnoremap <silent> <localleader>s :call LanguageClient_textDocument_documentSymbol()<CR>
   " nnoremap <silent> <localleader>S :call LanguageClient_workspace_symbol()<CR>
   " nnoremap <silent> <localleader>R :call LanguageClient_textDocument_rename()<CR>
-  nmap <localleader>R <Plug>(coc-rename)
   " Goto definition in new tab for language server
   " nnoremap <silent> <localleader>t :call LanguageClient_textDocument_definition({'gotoCmd': 'tabedit'})<CR>
 augroup END
@@ -288,7 +372,6 @@ inoremap %led <Esc>^"ld$:call AdHocSnippet("elixir", "logger_debug")<CR>j^f,"lP
 inoremap %lei <Esc>^"ld$:call AdHocSnippet("elixir", "logger_info")<CR>j^f,"lP
 inoremap %lew <Esc>^"ld$:call AdHocSnippet("elixir", "logger_warn")<CR>j^f,"lP
 inoremap %lee <Esc>^"ld$:call AdHocSnippet("elixir", "logger_error")<CR>j^f,"lP
-
 
 " Helper function, called below with mappings
 " Taken from https://blog.jez.io/haskell-development-with-neovim/
@@ -334,6 +417,13 @@ augroup filetype_haskell
   autocmd FileType haskell nnoremap <buffer> <C-s> :Tags<CR>
   autocmd FileType haskell nmap <buffer> gd <C-]>
   set tags=codex.tags,tags
+augroup END
+
+" zig bindings
+augroup filetype_zig
+  autocmd FileType zig nnoremap <buffer> <leader>en :ALENextWrap<CR>
+  autocmd FileType zig nnoremap <buffer> <leader>ep :ALEPreviousWrap<CR>
+  autocmd FileType zig nnoremap <silent> <localleader>= :call zig#fmt#Format()<CR>
 augroup END
 
 augroup vimrc_appearance | autocmd!
