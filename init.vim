@@ -108,13 +108,7 @@ Plug 'farmergreg/vim-lastplace'
 " Colorscheme
 Plug 'liuchengxu/space-vim-dark'
 Plug 'nanotech/jellybeans.vim'
-Plug 'whatyouhide/vim-gotham'
-Plug 'fenetikm/falcon'
-Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'joshdick/onedark.vim'
-Plug 'mhartington/oceanic-next'
-Plug 'iCyMind/NeoSolarized'
-Plug 'chriskempson/base16-vim'
 Plug 'GoNZooo/jellybeans.vim'
 
 " Rainbow parens
