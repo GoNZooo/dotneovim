@@ -117,8 +117,8 @@ Plug 'iCyMind/NeoSolarized'
 Plug 'chriskempson/base16-vim'
 Plug 'GoNZooo/jellybeans.vim'
 
+" Rainbow parens
 Plug 'luochen1990/rainbow'
-
 let g:rainbow_active = 0
 
 Plug 'gerw/vim-HiLinkTrace'
