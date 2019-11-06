@@ -1,24 +1,26 @@
 call plug#begin('C:\Users\ricka\code\vim\dotneovim\plugged')
 
 " Language server
-" Plug 'autozimu/LanguageClient-neovim', {
-"   \ 'branch': 'next',
-"   \ 'do': 'bash install.sh',
-"   \ }
+Plug 'autozimu/LanguageClient-neovim', {
+  \ 'branch': 'next',
+  \ 'do': 'bash install.sh',
+  \ }
 
-" Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-
-" let g:LanguageClient_serverCommands = {
-"   \ 'elixir': ['~/tools/elixir-ls/language_server.sh'],
-"   \ 'purescript': ['purescript-language-server', '--stdio', '--log', './psc-ide-log']
-"   \ }
-"   \ 'ocaml': ['ocaml-language-server', '--stdio'],
-"   \ 'reason': ['ocaml-language-server', '--stdio'],
-"   \ 'json': ['json-languageserver', '--stdio'],
-"   \ 'javascript': ['javascript-typescript-stdio'],
-"   \ 'haskell': ['hie-wrapper', '--lsp']
+let g:LanguageClient_serverCommands = {
+  \ 'elixir': ['~/tools/elixir-ls/language_server.sh'],
+  \ 'purescript': ['purescript-language-server', '--stdio', '--log', './psc-ide-log']
+  \ }
+  " \ 'ocaml': ['ocaml-language-server', '--stdio'],
+  " \ 'reason': ['ocaml-language-server', '--stdio'],
+  " \ 'json': ['json-languageserver', '--stdio'],
+  " \ 'javascript': ['javascript-typescript-stdio'],
+  " \ 'haskell': ['hie-wrapper', '--lsp']
+  " \ }
 
 " let g:LanguageClient_hoverPreview = "Always"
+
+" Alternative language server plugin
+" Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
 " Plugins
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
