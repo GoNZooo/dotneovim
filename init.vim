@@ -393,6 +393,7 @@ augroup filetype_prettier
   let g:prettier#config#trailing_comma = 'es5'
   let g:prettier#config#arrow_parens = 'always'
   let g:prettier#config#bracket_spacing = 'true'
+  let g:prettier#config#config_precedence = 'prefer-file'
 augroup END
 
 " haskell bindings
