@@ -16,7 +16,12 @@
     },
     "elixirLS": {
       "command": "/home/gonz/tools/elixir-ls/language_server.sh",
-      "filetypes": ["elixir", "eelixir"]
+      "filetypes": [
+        "elixir",
+        "eelixir"
+      ]
     }
-  }
+  },
+  "coc.preferences.useQuickfixForLocations": false,
+  "codeLens.enable": true
 }
