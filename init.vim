@@ -89,6 +89,8 @@ if !exists('g:vscode')
   Plug 'leafgarland/typescript-vim'
   Plug 'ianks/vim-tsx'
   Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+
+  Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
   
   " zig
   let g:zig_fmt_autosave = 1
