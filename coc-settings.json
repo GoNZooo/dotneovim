@@ -1,4 +1,11 @@
 {
+  "coc.preferences.useQuickfixForLocations": true,
+  "coc.preferences.formatOnSaveFiletypes": ["python"],
+  "python.formatting.provider": "autopep8",
+  "python.linting.enabled": true,
+  "python.linting.flake8Enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.jediEnabled": false,
   "languageserver": {
     "purescript": {
       "command": "purescript-language-server",
@@ -16,7 +23,15 @@
     },
     "elixirLS": {
       "command": "/home/gonz/tools/elixir-ls/language_server.sh",
-      "filetypes": ["elixir", "eelixir"]
+      "filetypes": [
+        "elixir",
+        "eelixir"
+      ]
+    },
+    "zls": {
+      "command": "C:\\Users\\ricka\\code\\zig\\zls\\zig-cache\\bin\\zls.exe",
+      "filetypes": ["zig"]
     }
-  }
+  },
+  "codeLens.enable": true
 }
