@@ -1,4 +1,11 @@
 {
+  "coc.preferences.useQuickfixForLocations": true,
+  "coc.preferences.formatOnSaveFiletypes": ["python"],
+  "python.formatting.provider": "autopep8",
+  "python.linting.enabled": true,
+  "python.linting.flake8Enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.jediEnabled": false,
   "languageserver": {
     "purescript": {
       "command": "purescript-language-server",
@@ -26,6 +33,5 @@
       "filetypes": ["zig"]
     }
   },
-  "coc.preferences.useQuickfixForLocations": false,
   "codeLens.enable": true
 }
