@@ -20,6 +20,10 @@
         "elixir",
         "eelixir"
       ]
+    },
+    "zls": {
+      "command": "C:\\Users\\ricka\\code\\zig\\zls\\zig-cache\\bin\\zls.exe",
+      "filetypes": ["zig"]
     }
   },
   "coc.preferences.useQuickfixForLocations": false,
