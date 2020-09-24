@@ -3,6 +3,8 @@ let g:mapleader=' '
 " , is localleader
 let g:maplocalleader=','
 
+set mouse=a
+
 if !exists('g:vscode')
   call plug#begin('C:\Users\ricka\code\vim\dotneovim\plugged')
   
