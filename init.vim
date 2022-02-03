@@ -56,9 +56,9 @@ let g:LanguageClient_hoverPreview = "Always"
 " Plugins
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   let g:deoplete#enable_at_startup = 1
-  let g:deoplete#auto_complete_start_length = 2
-  " use tab for completion
-  inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+  inoremap <expr><tab> pumvisible() ? "\<c-y>" : "\<tab>"
+  imap <expr><c-j> pumvisible() ? "\<c-n>" : "\<c-j>"
+  imap <expr><c-k> pumvisible() ? "\<c-p>" : "\<c-k>"
 
 " PureScript
 Plug 'purescript-contrib/purescript-vim'
@@ -171,6 +171,9 @@ Plug 'leafgarland/typescript-vim'
 Plug 'ianks/vim-tsx'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 call plug#end()
+
+" Deoplete
+call deoplete#custom#option('min_pattern_length', 2)
 
 set mouse=""
 
