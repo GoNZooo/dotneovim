@@ -1,57 +1,56 @@
 call plug#begin('~/.config/nvim/plugged')
 
 " Language server
-Plug 'autozimu/LanguageClient-neovim', {
-  \ 'branch': 'next',
-  \ 'do': 'bash install.sh',
-  \ }
+" Plug 'autozimu/LanguageClient-neovim', {
+"   \ 'branch': 'next',
+"   \ 'do': 'bash install.sh',
+"   \ }
 
-let g:LanguageClient_useVirtualText = 0
+" let g:LanguageClient_useVirtualText = 0
 
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-let g:LanguageClient_serverCommands = {
-  \ 'elixir': ['~/tools/elixir-ls/language_server.sh'],
-  \ }
+" let g:LanguageClient_serverCommands = {}
 
-let g:LanguageClient_diagnosticsDisplay = {
- \    1: {
- \        "name": "Error",
- \        "texthl": "ALEError",
- \        "signText": ">",
- \        "signTexthl": "ALEErrorSign",
- \        "virtualTexthl": "Error",
- \    },
- \    2: {
- \        "name": "Warning",
- \        "texthl": "ALEWarning",
- \        "signText": "-",
- \        "signTexthl": "ALEWarningSign",
- \        "virtualTexthl": "Todo",
- \    },
- \    3: {
- \        "name": "Information",
- \        "texthl": "ALEInfo",
- \        "signText": "i",
- \        "signTexthl": "ALEInfoSign",
- \        "virtualTexthl": "Todo",
- \    },
- \    4: {
- \        "name": "Hint",
- \        "texthl": "ALEInfo",
- \        "signText": "h",
- \        "signTexthl": "ALEInfoSign",
- \        "virtualTexthl": "Todo",
- \    },
- \}
+" let g:LanguageClient_diagnosticsDisplay = {
+"  \    1: {
+"  \        "name": "Error",
+"  \        "texthl": "ALEError",
+"  \        "signText": ">",
+"  \        "signTexthl": "ALEErrorSign",
+"  \        "virtualTexthl": "Error",
+"  \    },
+"  \    2: {
+"  \        "name": "Warning",
+"  \        "texthl": "ALEWarning",
+"  \        "signText": "-",
+"  \        "signTexthl": "ALEWarningSign",
+"  \        "virtualTexthl": "Todo",
+"  \    },
+"  \    3: {
+"  \        "name": "Information",
+"  \        "texthl": "ALEInfo",
+"  \        "signText": "i",
+"  \        "signTexthl": "ALEInfoSign",
+"  \        "virtualTexthl": "Todo",
+"  \    },
+"  \    4: {
+"  \        "name": "Hint",
+"  \        "texthl": "ALEInfo",
+"  \        "signText": "h",
+"  \        "signTexthl": "ALEInfoSign",
+"  \        "virtualTexthl": "Todo",
+"  \    },
+"  \}
   " \ 'purescript': ['purescript-language-server', '--stdio', '--log', './psc-ide-log']
   " \ 'ocaml': ['ocaml-language-server', '--stdio'],
   " \ 'reason': ['ocaml-language-server', '--stdio'],
   " \ 'json': ['json-languageserver', '--stdio'],
   " \ 'javascript': ['javascript-typescript-stdio'],
+  " \ 'elixir': ['~/tools/elixir-ls/language_server.sh'],
   " \ 'haskell': ['hie-wrapper', '--lsp']
 
-let g:LanguageClient_hoverPreview = "Always"
+" let g:LanguageClient_hoverPreview = "Always"
 
 " Plugins
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -66,36 +65,15 @@ Plug 'purescript-contrib/purescript-vim'
 " Haskell
 Plug 'neovimhaskell/haskell-vim'
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
-Plug 'alx741/vim-hindent'
-Plug 'alx741/vim-stylishask'
-let g:hindent_on_save = 0
-let g:stylishask_on_save = 0
 " Don't automatically show buffer for GHCID; use terminal instead
 let g:ghcid_background = 1
 Plug 'w0rp/ale'
 let g:ale_linters = {'haskell': ['hlint'], 'elixir': [], 'javascript': []}
 " let g:ale_haskell_ghc_options = '-fno-code -v0 -isrc'
-" Plug 'parsonsmatt/intero-neovim'
-" Plug 'neomake/neomake'
-" Intero starts automatically. Set this if you'd like to prevent that.
-" let g:intero_start_immediately = 1
-
-" Enable type information on hover (when holding cursor at point for ~1 second).
-" let g:intero_type_on_hover = 0
-
-" Change the intero window size; default is 10.
-" let g:intero_window_size = 80
-
-" Sets the intero window to split vertically; default is horizontal
-" let g:intero_vertical_split = 1
-
-"Plug 'ludovicchabant/vim-gutentags'
-"let g:gutentags_cache_dir = '~/.tags_cache'
 
 Plug 'mileszs/ack.vim'
 let g:ackprg = 'rg --smart-case --vimgrep'
 
-"Plug 'justinmk/vim-sneak'
 Plug 'easymotion/vim-easymotion'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
@@ -328,18 +306,6 @@ inoremap %lei <Esc>^"ld$:call AdHocSnippet("elixir", "logger_info")<CR>j^f,"lP
 inoremap %lew <Esc>^"ld$:call AdHocSnippet("elixir", "logger_warn")<CR>j^f,"lP
 inoremap %lee <Esc>^"ld$:call AdHocSnippet("elixir", "logger_error")<CR>j^f,"lP
 
-
-" Helper function, called below with mappings
-" Taken from https://blog.jez.io/haskell-development-with-neovim/
-function! HaskellFormat(which) abort
-  if a:which ==# 'hindent' || a:which ==# 'both'
-    :Hindent
-  endif
-  if a:which ==# 'stylish' || a:which ==# 'both'
-    :Stylishask
-  endif
-endfunction
-
 augroup filetype_prettier
   autocmd FileType typescript nnoremap <buffer> <localleader>= :Prettier<CR>
   autocmd FileType typescript.tsx nnoremap <buffer> <localleader>= :Prettier<CR>
@@ -353,26 +319,6 @@ augroup filetype_prettier
   let g:prettier#config#trailing_comma = 'es5'
   let g:prettier#config#arrow_parens = 'always'
   let g:prettier#config#bracket_spacing = 'true'
-augroup END
-
-" haskell bindings
-augroup filetype_haskell
-  " autocmd FileType haskell nnoremap <buffer> <silent> K :InteroGenericType<CR>
-  " autocmd FileType haskell nnoremap <buffer> <silent> gd :InteroGoToDef<CR>
-  " autocmd FileType haskell nnoremap <buffer> <silent> <leader>il :InteroLoadCurrentFile<CR>
-  " autocmd FileType haskell nnoremap <buffer> <silent> <leader>im :InteroLoadCurrentModule<CR>
-  " autocmd FileType haskell nnoremap <buffer> <silent> <leader>io :InteroOpen<CR>
-  " autocmd FileType haskell nnoremap <buffer> <silent> <leader>ih :InteroHide<CR>
-  " autocmd FileType haskell nnoremap <buffer> <silent> <leader>ir :InteroReload<CR>
-  " autocmd FileType haskell nnoremap <buffer> <silent> <leader>it :InteroInsertType<CR>
-  " autocmd FileType haskell nnoremap <buffer> <leader>ist :InteroSetTargets<CR>
-  " autocmd FileType haskell nnoremap <buffer> <silent> <leader>ict :InteroClearTargets<CR>
-  autocmd FileType haskell nnoremap <buffer> <localleader>i :call HaskellFormat('hindent')<CR>
-  autocmd FileType haskell nnoremap <buffer> <localleader>= :call HaskellFormat('both')<CR>
-  autocmd FileType haskell nnoremap <buffer> <leader>= :call HaskellFormat('stylish')<CR>
-  autocmd FileType haskell nnoremap <buffer> <C-s> :Tags<CR>
-  autocmd FileType haskell nmap <buffer> gd <C-]>
-  set tags=codex.tags,tags
 augroup END
 
 augroup vimrc_appearance | autocmd!
