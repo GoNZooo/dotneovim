@@ -1,58 +1,5 @@
-call plug#begin('~/.config/nvim/plugged')
-
-" Language server
-" Plug 'autozimu/LanguageClient-neovim', {
-"   \ 'branch': 'next',
-"   \ 'do': 'bash install.sh',
-"   \ }
-
-" let g:LanguageClient_useVirtualText = 0
-
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" let g:LanguageClient_serverCommands = {}
-
-" let g:LanguageClient_diagnosticsDisplay = {
-"  \    1: {
-"  \        "name": "Error",
-"  \        "texthl": "ALEError",
-"  \        "signText": ">",
-"  \        "signTexthl": "ALEErrorSign",
-"  \        "virtualTexthl": "Error",
-"  \    },
-"  \    2: {
-"  \        "name": "Warning",
-"  \        "texthl": "ALEWarning",
-"  \        "signText": "-",
-"  \        "signTexthl": "ALEWarningSign",
-"  \        "virtualTexthl": "Todo",
-"  \    },
-"  \    3: {
-"  \        "name": "Information",
-"  \        "texthl": "ALEInfo",
-"  \        "signText": "i",
-"  \        "signTexthl": "ALEInfoSign",
-"  \        "virtualTexthl": "Todo",
-"  \    },
-"  \    4: {
-"  \        "name": "Hint",
-"  \        "texthl": "ALEInfo",
-"  \        "signText": "h",
-"  \        "signTexthl": "ALEInfoSign",
-"  \        "virtualTexthl": "Todo",
-"  \    },
-"  \}
-  " \ 'purescript': ['purescript-language-server', '--stdio', '--log', './psc-ide-log']
-  " \ 'ocaml': ['ocaml-language-server', '--stdio'],
-  " \ 'reason': ['ocaml-language-server', '--stdio'],
-  " \ 'json': ['json-languageserver', '--stdio'],
-  " \ 'javascript': ['javascript-typescript-stdio'],
-  " \ 'elixir': ['~/tools/elixir-ls/language_server.sh'],
-  " \ 'haskell': ['hie-wrapper', '--lsp']
-
-" let g:LanguageClient_hoverPreview = "Always"
-
 " Plugins
+call plug#begin('~/.config/nvim/plugged')
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   let g:deoplete#enable_at_startup = 1
   inoremap <expr><tab> pumvisible() ? "\<c-y>" : "\<tab>"
@@ -66,11 +13,11 @@ Plug 'purescript-contrib/purescript-vim'
 Plug 'neovimhaskell/haskell-vim'
 Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 " Don't automatically show buffer for GHCID; use terminal instead
-let g:ghcid_background = 1
+" let g:ghcid_background = 1
+let g:ghcid_keep_open = 1
 Plug 'w0rp/ale'
 let g:ale_linters = {'haskell': ['hlint'], 'elixir': [], 'javascript': []}
 " let g:ale_haskell_ghc_options = '-fno-code -v0 -isrc'
-
 Plug 'mileszs/ack.vim'
 let g:ackprg = 'rg --smart-case --vimgrep'
 
@@ -263,7 +210,30 @@ nmap <leader>s <Plug>(easymotion-s2)
 map / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 
-" Set higher updaterate
+" Quickfix
+function NextQuickFix()
+  " If quickfix has only one item, use :cfirst to go to the first item
+  if len(getqflist()) == 1
+    cfirst
+  else
+    try | cnext | catch | cfirst | endtry
+  endif
+endfunction
+
+function PreviousQuickFix()
+  " If quickfix has only one item, use :cfirst to go to the first item
+  if len(getqflist()) == 1
+    cfirst
+  else
+    try | cprevious | catch | clast | endtry
+  endif
+endfunction
+
+map <leader>en :call NextQuickFix()<CR>
+map <leader>ep :call PreviousQuickFix()<CR>
+
+"
+"" Set higher updaterate
 set updatetime=50
 set ttimeoutlen=0
 set switchbuf=usetab
@@ -271,40 +241,6 @@ set switchbuf=usetab
 " Loading project specific config
 set exrc
 set secure
-
-" Language server bindings
-augroup language_server_protocol
-  " inoremap <silent><expr> <c-space> coc#refresh()
-  " nnoremap <silent> K :call CocAction('doHover')<CR>
-  " nmap <silent> gd <Plug>(coc-definition)
-  " nmap <silent> <leader>ep <Plug>(coc-diagnostic-prev)
-  " nmap <silent> <leader>en <Plug>(coc-diagnostic-next)
-  " nnoremap <silent> <localleader>r <Plug>(coc-references)
-  " nnoremap <silent> <localleader>= :call CocAction('format')<CR>
-  " nnoremap <silent> <localleader>, <Plug>(coc-codeaction)
-  " nmap <localleader>R <Plug>(coc-rename)
-
-  nnoremap <silent> <localleader>s :call LanguageClient_textDocument_documentSymbol()<CR>
-  nnoremap <silent> <localleader>S :call LanguageClient_workspace_symbol()<CR>
-  nnoremap <silent> <localleader>R :call LanguageClient_textDocument_rename()<CR>
-  nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-  " Goto definition in new tab for language server
-  nnoremap <silent> <localleader>t :call LanguageClient_textDocument_definition({'gotoCmd': 'tabedit'})<CR>
-augroup END
-
-autocmd BufNewFile,BufRead *.wiki setfiletype creole
-
-function! AdHocSnippet(language, snippet)
-  let l:path = "/home/gonz/.config/adhoc-snippets/" . a:language . "/" . a:snippet . ".snippet"
-  echom l:path
-  execute "read " . l:path
-endfunction
-
-" Elixir debugging remaps
-inoremap %led <Esc>^"ld$:call AdHocSnippet("elixir", "logger_debug")<CR>j^f,"lP
-inoremap %lei <Esc>^"ld$:call AdHocSnippet("elixir", "logger_info")<CR>j^f,"lP
-inoremap %lew <Esc>^"ld$:call AdHocSnippet("elixir", "logger_warn")<CR>j^f,"lP
-inoremap %lee <Esc>^"ld$:call AdHocSnippet("elixir", "logger_error")<CR>j^f,"lP
 
 augroup filetype_prettier
   autocmd FileType typescript nnoremap <buffer> <localleader>= :Prettier<CR>
