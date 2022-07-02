@@ -95,6 +95,8 @@ Plug 'LnL7/vim-nix'
 Plug 'leafgarland/typescript-vim'
 Plug 'ianks/vim-tsx'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+
+Plug 'github/copilot.vim'
 call plug#end()
 
 " Deoplete
