@@ -1,28 +1,36 @@
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  let g:deoplete#enable_at_startup = 1
-  inoremap <expr><tab> pumvisible() ? "\<c-y>" : "\<tab>"
-  imap <expr><c-j> pumvisible() ? "\<c-n>" : "\<c-j>"
-  imap <expr><c-k> pumvisible() ? "\<c-p>" : "\<c-k>"
+Plug 'junnplus/lsp-setup.nvim'
+
+" LSP
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'williamboman/nvim-lsp-installer'
+
+" Completion engine
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+
+" Snippets
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
 
 " PureScript
 Plug 'purescript-contrib/purescript-vim'
 
-" Haskell
-Plug 'neovimhaskell/haskell-vim'
-Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
-" Don't automatically show buffer for GHCID; use terminal instead
-" let g:ghcid_background = 1
-let g:ghcid_keep_open = 1
-Plug 'w0rp/ale'
-let g:ale_linters = {'haskell': ['hlint'], 'elixir': [], 'javascript': []}
+" Plug 'w0rp/ale'
+" let g:ale_linters = {'haskell': ['hlint'], 'elixir': [], 'javascript': []}
 " let g:ale_haskell_ghc_options = '-fno-code -v0 -isrc'
 Plug 'mileszs/ack.vim'
 let g:ackprg = 'rg --smart-case --vimgrep'
 
 Plug 'easymotion/vim-easymotion'
-Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
@@ -73,34 +81,26 @@ Plug 'chriskempson/base16-vim'
 Plug 'GoNZooo/jellybeans.vim'
 
 Plug 'luochen1990/rainbow'
-
-let g:rainbow_active = 0
-
-Plug 'gerw/vim-HiLinkTrace'
-
-Plug 'elixir-editors/vim-elixir'
+let g:rainbow_active = 1
 
 " org-mode
-Plug 'tpope/vim-speeddating'
-Plug 'mattn/calendar-vim'
-Plug 'jceb/vim-orgmode'
+Plug 'nvim-orgmode/orgmode'
 
-" creole
-Plug 'vim-scripts/vim-creole'
+" Nicer quickfix
+Plug 'kevinhwang91/nvim-bqf'
 
-" nix
-Plug 'LnL7/vim-nix'
-
-" TypeScript
-Plug 'leafgarland/typescript-vim'
-Plug 'ianks/vim-tsx'
-Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-
+" Copilot
 Plug 'github/copilot.vim'
-call plug#end()
 
-" Deoplete
-call deoplete#custom#option('min_pattern_length', 2)
+let g:copilot_filetypes = {
+      \ '*': v:true
+      \ }
+
+" Jira
+Plug 'n0v1c3/vira', { 'do': './install.sh' }
+let g:vira_config_file_servers = $HOME . '/.config/vira/vira_servers.json'
+let g:vira_config_file_projects = $HOME . '/.config/vira/vira_projects.json'
+call plug#end()
 
 set mouse=""
 
@@ -153,7 +153,7 @@ set colorcolumn=80,100
 " highlight cursor position
 " set cursorline
 " set cursorcolumn
-set scrolloff=5
+set scrolloff=2
 
 " Make it so that we always go to the last position we were at
 " in the buffer when we were last in it.
@@ -166,11 +166,12 @@ if has("autocmd")
 
 " Expansions
 "
-" %% expands to current path, all thanks to Gary Bernhardt
+" %% expands to current path, all thanks to Gary Bernhardt & Drew Neil
 " See: http://vimcasts.org/episodes/the-edit-command/
 cnoremap %% <C-R>=fnameescape(expand('%:p:h'))."/"<CR>
 " %rc expands to vimrc
 cnoremap %rc ~/.config/nvim/init.vim
+cnoremap %ll ~/.config/nvim/lua/config.lua
 
 map <leader>cd :lcd %:p:h<CR>
 
@@ -212,29 +213,6 @@ nmap <leader>s <Plug>(easymotion-s2)
 map / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 
-" Quickfix
-function NextQuickFix()
-  " If quickfix has only one item, use :cfirst to go to the first item
-  if len(getqflist()) == 1
-    cfirst
-  else
-    try | cnext | catch | cfirst | endtry
-  endif
-endfunction
-
-function PreviousQuickFix()
-  " If quickfix has only one item, use :cfirst to go to the first item
-  if len(getqflist()) == 1
-    cfirst
-  else
-    try | cprevious | catch | clast | endtry
-  endif
-endfunction
-
-map <leader>en :call NextQuickFix()<CR>
-map <leader>ep :call PreviousQuickFix()<CR>
-
-"
 "" Set higher updaterate
 set updatetime=50
 set ttimeoutlen=0
@@ -244,24 +222,10 @@ set switchbuf=usetab
 set exrc
 set secure
 
-augroup filetype_prettier
-  autocmd FileType typescript nnoremap <buffer> <localleader>= :Prettier<CR>
-  autocmd FileType typescript.tsx nnoremap <buffer> <localleader>= :Prettier<CR>
-  autocmd FileType javascript.jsx nnoremap <buffer> <localleader>= :Prettier<CR>
-  autocmd FileType html nnoremap <buffer> <localleader>= :Prettier<CR>
-  autocmd FileType yaml nnoremap <buffer> <localleader>= :Prettier<CR>
-
-  let g:prettier#config#print_width = 100
-  let g:prettier#config#tab_width = 2
-  let g:prettier#config#single_quote = 'false'
-  let g:prettier#config#trailing_comma = 'es5'
-  let g:prettier#config#arrow_parens = 'always'
-  let g:prettier#config#bracket_spacing = 'true'
-augroup END
-
-augroup vimrc_appearance | autocmd!
-	autocmd ColorScheme * call s:vimrc_postcolorscheme()
-augroup END
+" completion list
+" inoremap <expr><tab> pumvisible() ? "\<c-y>" : "\<tab>"
+" imap <expr><c-j> pumvisible() ? "\<c-n>" : "\<c-j>"
+" imap <expr><c-k> pumvisible() ? "\<c-p>" : "\<c-k>"
 
 highlight GutterSignAdd    guifg=#009900 ctermfg=2
 highlight GutterSignChange guifg=#bbbb00 ctermfg=3
@@ -269,3 +233,13 @@ highlight GutterSignDelete guifg=#ff2222 ctermfg=1
 highlight link GitGutterAdd    GutterSignAdd
 highlight link GitGutterChange GutterSignChange
 highlight link GitGutterDelete GutterSignDelete
+
+" Basic `:Git` mappings
+nmap <leader>Gg :Git<CR>
+
+" Load our lua config
+lua require("config")
+
+" Enable per-project configurations
+set exrc
+set secure
