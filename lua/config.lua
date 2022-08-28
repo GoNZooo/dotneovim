@@ -176,10 +176,14 @@ lspconfig.kotlin_language_server.setup {
 lspconfig.jsonls.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 }
+lspconfig.marksman.setup {
+  on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
+}
 
 vim.cmd [[autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync()]]
 vim.cmd [[autocmd BufWritePre *.hs lua vim.lsp.buf.formatting_sync()]]
 vim.cmd [[autocmd BufWritePre *.tsx? lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre *.md lua vim.lsp.buf.formatting_sync()]]
 -- vim.cmd [[autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync()]]
 
 require('orgmode').setup({
