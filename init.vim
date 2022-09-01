@@ -15,8 +15,8 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 
 " Snippets
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
@@ -100,6 +100,10 @@ let g:copilot_filetypes = {
 Plug 'n0v1c3/vira', { 'do': './install.sh' }
 let g:vira_config_file_servers = $HOME . '/.config/vira/vira_servers.json'
 let g:vira_config_file_projects = $HOME . '/.config/vira/vira_projects.json'
+
+" GitHub
+Plug 'ldelossa/litee.nvim'
+Plug 'ldelossa/gh.nvim'
 call plug#end()
 
 set mouse=""
@@ -235,7 +239,8 @@ highlight link GitGutterChange GutterSignChange
 highlight link GitGutterDelete GutterSignDelete
 
 " Basic `:Git` mappings
-nmap <leader>Gg :Git<CR>
+nmap <leader>GG :Git<CR>
+nmap <leader>GP :Git push<CR>
 
 " Load our lua config
 lua require("config")
