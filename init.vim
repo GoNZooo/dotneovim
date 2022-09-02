@@ -1,8 +1,11 @@
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
-Plug 'junnplus/lsp-setup.nvim'
+
+" Misc
+Plug 'nvim-lua/plenary.nvim'
 
 " LSP
+Plug 'junnplus/lsp-setup.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
@@ -40,9 +43,9 @@ Plug 'int3/vim-extradite'
 
 Plug 'airblade/vim-gitgutter'
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-let g:fzf_buffers_jump = 1
+" Fuzzy searching
+Plug 'nvim-telescope/telescope-fzf-native.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 
 Plug 'powerman/vim-plugin-AnsiEsc'
 
@@ -96,14 +99,10 @@ let g:copilot_filetypes = {
       \ '*': v:true
       \ }
 
-" Jira
-Plug 'n0v1c3/vira', { 'do': './install.sh' }
-let g:vira_config_file_servers = $HOME . '/.config/vira/vira_servers.json'
-let g:vira_config_file_projects = $HOME . '/.config/vira/vira_projects.json'
-
 " GitHub
 Plug 'ldelossa/litee.nvim'
 Plug 'ldelossa/gh.nvim'
+
 call plug#end()
 
 set mouse=""
@@ -188,22 +187,6 @@ map <leader>et :tabe %%
 map <leader>ev :vsp %%
 " New window from horizontal split
 map <leader>es :sp %%
-
-" Fzf
-map <C-p> :Files<CR>
-map <C-g> :GFiles<CR>
-map <leader>ff :Files<CR>
-map <leader>fF :Files!<CR>
-map <leader>gf :GFiles<CR>
-map <leader>gF :GFiles!<CR>
-map <leader>gc :GFiles?<CR>
-"map <C-b> :Buffers<CR>
-map <leader>bb :Buffers<CR>
-map <leader>bB :Buffers!<CR>
-map <leader>cf :Commits<CR>
-map <leader>cF :Commits!<CR>
-map <leader>/ :Rg 
-map <leader>* :Rg <c-r>=expand("<cword>")<CR>
 
 " Map tilde (above TAB) to exit insert mode and visual mode
 " For some reason it will actually press enter when trying to exit

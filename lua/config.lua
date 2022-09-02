@@ -1,3 +1,4 @@
+require("fuzzy_search")
 require("orgmode").setup_ts_grammar()
 require("snippets")
 require("github")
@@ -8,7 +9,6 @@ require("orgmode").setup({
   org_default_notes_file = "~/org/notes.org",
 })
 require("lsp")
-
 require("completion")
 
 vim.keymap.set("n", "<leader><leader>S", "<cmd>source ~/.config/nvim/lua/snippets.lua<CR>")
