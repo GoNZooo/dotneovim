@@ -90,12 +90,19 @@ Plug 'kevinhwang91/nvim-bqf'
 Plug 'github/copilot.vim'
 
 let g:copilot_filetypes = {
+      \ 'dap-repl': v:false,
+      \ 'dapui_watches': v:false,
       \ '*': v:true
       \ }
 
 " GitHub
 Plug 'ldelossa/litee.nvim'
 Plug 'ldelossa/gh.nvim'
+
+" Debugging
+Plug 'mfussenegger/nvim-dap'
+Plug 'GoNZooo/nvim-dap-ui', { 'branch': 'gonz.fix-nil-index' }
+Plug 'theHamsta/nvim-dap-virtual-text'
 
 call plug#end()
 
