@@ -1,7 +1,7 @@
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
 
-" Misc
+" Misc helper functions (dependency of popular plugins)
 Plug 'nvim-lua/plenary.nvim'
 
 " LSP
@@ -21,18 +21,11 @@ Plug 'hrsh7th/cmp-path'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 
+" Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 
-" PureScript
-Plug 'purescript-contrib/purescript-vim'
-
-" Plug 'w0rp/ale'
-" let g:ale_linters = {'haskell': ['hlint'], 'elixir': [], 'javascript': []}
-" let g:ale_haskell_ghc_options = '-fno-code -v0 -isrc'
-Plug 'mileszs/ack.vim'
-let g:ackprg = 'rg --smart-case --vimgrep'
-
+" Misc. motions/text search
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -49,6 +42,7 @@ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 
 Plug 'powerman/vim-plugin-AnsiEsc'
 
+" Statusline
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
       \ 'active': {
@@ -71,7 +65,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Jump to last position when reopening files
 Plug 'farmergreg/vim-lastplace'
 
-" Colorscheme
+" Colorschemes
 Plug 'liuchengxu/space-vim-dark'
 Plug 'nanotech/jellybeans.vim'
 Plug 'whatyouhide/vim-gotham'
