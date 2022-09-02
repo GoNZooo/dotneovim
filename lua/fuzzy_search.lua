@@ -1,5 +1,6 @@
 require('telescope').setup {
   defaults = {
+    layout_strategy = 'vertical',
     -- Default configuration for telescope goes here:
     -- config_key = value,
     mappings = {
@@ -36,3 +37,7 @@ vim.keymap.set("n", "<leader>/", "<cmd>Telescope live_grep<CR>")
 vim.keymap.set("n", "<leader>*", "<cmd>Telescope grep_string<CR>")
 vim.keymap.set("n", "<leader>hc", "<cmd>Telescope commands<CR>")
 vim.keymap.set("n", "<leader>hh", "<cmd>Telescope help_tags<CR>")
+vim.keymap.set("n", "<leader>Gc", "<cmd>Telescope git_commits<CR>")
+vim.keymap.set("n", "<leader>GB", "<cmd>Telescope git_bcommits<CR>")
+vim.keymap.set("n", "<leader>Gb", "<cmd>Telescope git_branches<CR>")
+vim.keymap.set("n", "<leader>Gs", "<cmd>Telescope git_status<CR>")

@@ -7,6 +7,8 @@ vim.keymap.set("n", "<leader>ep", vim.diagnostic.goto_prev, opts)
 vim.keymap.set("n", "<leader>en", vim.diagnostic.goto_next, opts)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
 
+local telescope = require("telescope.builtin")
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(_, bufnr) -- client, bufnr
@@ -15,8 +17,10 @@ local on_attach = function(_, bufnr) -- client, bufnr
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-  vim.keymap.set("n", "<leader>R", vim.lsp.buf.references, bufopts)
-  vim.keymap.set("n", "<leader>gg", vim.lsp.buf.workspace_symbol, bufopts)
+  vim.keymap.set("n", "<localleader>r", telescope.lsp_references, bufopts)
+  vim.keymap.set("n", "<localleader>S", telescope.lsp_document_symbols, bufopts)
+  vim.keymap.set("n", "<localleader>s", telescope.lsp_workspace_symbols, bufopts)
+  vim.keymap.set("n", "<localleader>d", telescope.diagnostics, bufopts)
   vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
   vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
   vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
