@@ -4,6 +4,9 @@ return {
   parse("xqq", "{-# LANGUAGE QuasiQuotes #-}"),
   parse("module", "module ${1:Module} where"),
   parse("iq", "import qualified ${1:RIO.Map} as ${2:Map}"),
+  parse("mio", "MonadIO m"),
+  parse("mul", "MonadUnliftIO m"),
+  parse("mr", "MonadReader env m"),
   s("dl", fmt([[{} {}]], {
     c(1, { t "traceM", t "traceShowM" }),
     d(2, function(trace_choice)
