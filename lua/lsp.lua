@@ -1,4 +1,5 @@
 require("nvim-lsp-installer").setup {}
+
 local lspconfig = require("lspconfig")
 
 local opts = { noremap = true, silent = true }
@@ -11,7 +12,13 @@ local telescope = require("telescope.builtin")
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
-local on_attach = function(_, bufnr) -- client, bufnr
+local on_attach = function(client, bufnr)
+  -- Disable formatting for tsserver
+  if client.name == "tsserver" then
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+  end
+
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -49,9 +56,7 @@ lspconfig.sumneko_lua.setup {
 lspconfig.pyright.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 }
-lspconfig.tsserver.setup {
-  on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
-}
+lspconfig.tsserver.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 lspconfig.hls.setup {
   on_attach = on_attach,
   flags = lsp_flags,
@@ -72,15 +77,43 @@ lspconfig.kotlin_language_server.setup {
 lspconfig.jsonls.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 }
-lspconfig.eslint.setup {
-  on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
-}
--- lspconfig.marksman.setup {
---   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
--- }
+lspconfig.eslint.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
+
+local null_ls = require("null-ls")
+
+null_ls.setup({
+  on_attach = function(client, _) -- client, bufnr
+    if client.server_capabilities.documentFormattingProvider then
+      -- format on save
+      vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
+    end
+
+    if client.server_capabilities.documentRangeFormattingProvider then
+      vim.cmd("xnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.range_formatting({})<CR>")
+    end
+  end,
+})
+
+local prettier = require("prettier")
+
+prettier.setup({
+  bin = 'prettierd',
+  filetypes = {
+    "css",
+    "graphql",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "less",
+    "markdown",
+    "scss",
+    "typescript",
+    "typescriptreact",
+  },
+})
 
 vim.cmd [[autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync()]]
 vim.cmd [[autocmd BufWritePre *.hs lua vim.lsp.buf.formatting_sync()]]
-vim.cmd [[autocmd BufWritePre *.tsx? lua vim.lsp.buf.formatting_sync()]]
+-- vim.cmd [[autocmd BufWritePre *.tsx? <Plug>(prettier-format)]]
 -- vim.cmd [[autocmd BufWritePre *.md lua vim.lsp.buf.formatting_sync()]]
 -- vim.cmd [[autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync()]]
