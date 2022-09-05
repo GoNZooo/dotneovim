@@ -1,6 +1,6 @@
 -- GitHub
-require('litee.lib').setup()
-require('litee.gh').setup({
+require("litee.lib").setup()
+require("litee.gh").setup({
   -- deprecated, around for compatability for now.
   jump_mode             = "invoking",
   -- remap the arrow keys to resize any litee.nvim windows.

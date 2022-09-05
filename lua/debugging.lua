@@ -1,20 +1,20 @@
 local dap = require("dap")
 
 dap.adapters.haskell = {
-  type = 'executable';
-  command = 'haskell-debug-adapter';
-  args = { '--hackage-version=0.0.33.0' };
+  type = "executable";
+  command = "haskell-debug-adapter";
+  args = { "--hackage-version=0.0.33.0" };
 }
 dap.configurations.haskell = {
   {
-    type = 'haskell',
-    request = 'launch',
-    name = 'Debug',
-    workspace = '${workspaceFolder}',
+    type = "haskell",
+    request = "launch",
+    name = "Debug",
+    workspace = "${workspaceFolder}",
     startup = "${file}",
     stopOnEntry = false,
-    logFile = vim.fn.stdpath('data') .. '/haskell-dap.log',
-    logLevel = 'WARNING',
+    logFile = vim.fn.stdpath("data") .. "/haskell-dap.log",
+    logLevel = "WARNING",
     ghciEnv = vim.empty_dict(),
     ghciPrompt = "Q> ",
     ghciInitialPrompt = "Q> ",
@@ -90,7 +90,7 @@ require("nvim-dap-virtual-text").setup()
 vim.keymap.set("n", "<localleader>b", dap.toggle_breakpoint)
 vim.keymap.set("n", "<localleader>B",
   function()
-    dap.set_breakpoint(nil, nil, vim.fn.input('Breakpoint condition: '))
+    dap.set_breakpoint(nil, nil, vim.fn.input("Breakpoint condition: "))
   end
 )
 vim.keymap.set("n", "<F1>", dap.continue)
@@ -106,7 +106,7 @@ vim.keymap.set("n", "<localleader>dr",
 vim.keymap.set("n", "<localleader>dl", dap.run_last)
 vim.keymap.set("n", "<localleader>lp",
   function()
-    dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
+    dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
   end
 )
 vim.keymap.set("n", "<localleader>du", dapui.toggle)
