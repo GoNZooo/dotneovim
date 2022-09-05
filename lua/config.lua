@@ -11,6 +11,7 @@ require("orgmode").setup({
 require("lsp")
 require("completion")
 require("debugging")
+require("statusline")
 
 vim.keymap.set("n", "<leader><leader>S", "<cmd>source ~/.config/nvim/lua/snippets.lua<CR>")
 vim.keymap.set("n", "<leader><leader>L", "<cmd>source ~/.config/nvim/lua/config.lua<CR>")

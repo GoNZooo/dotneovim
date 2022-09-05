@@ -47,18 +47,7 @@ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'powerman/vim-plugin-AnsiEsc'
 
 " Statusline
-Plug 'itchyny/lightline.vim'
-let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ],
-      \   'right': [ [ 'lineinfo' ],
-      \              [ 'fileformat', 'filetype' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
-      \ },
-      \ }
+Plug 'nvim-lualine/lualine.nvim'
 set laststatus=2
 
 " File browsing, enhanced netrw
