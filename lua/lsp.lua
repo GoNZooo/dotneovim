@@ -117,3 +117,10 @@ vim.cmd [[autocmd BufWritePre *.hs lua vim.lsp.buf.formatting_sync()]]
 -- vim.cmd [[autocmd BufWritePre *.tsx? <Plug>(prettier-format)]]
 -- vim.cmd [[autocmd BufWritePre *.md lua vim.lsp.buf.formatting_sync()]]
 -- vim.cmd [[autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync()]]
+
+local disable_auto_formatting = function()
+  vim.cmd [[autocmd WinEnter <buffer> set eventignore+=BufWritePre]]
+  vim.cmd [[autocmd WinLeave <buffer> set eventignore-=BufWritePre]]
+end
+
+vim.api.nvim_create_user_command("DisableAutoFormattingForBuffer", disable_auto_formatting, {})
