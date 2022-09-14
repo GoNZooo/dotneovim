@@ -13,7 +13,7 @@ local telescope = require("telescope.builtin")
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  -- Disable formatting for tsserver
+  -- Disable formatting for tsserver (this should be handled by null-ls)
   if client.name == "tsserver" then
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
