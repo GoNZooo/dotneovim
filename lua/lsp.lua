@@ -10,6 +10,21 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
 
 local telescope = require("telescope.builtin")
 
+local null_ls = require("null-ls")
+
+null_ls.setup({
+  on_attach = function(client, _) -- client, bufnr
+    if client.server_capabilities.documentFormattingProvider then
+      -- format on save
+      vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()")
+    end
+
+    if client.server_capabilities.documentRangeFormattingProvider then
+      vim.cmd("xnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.range_formatting({})<CR>")
+    end
+  end,
+})
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -78,21 +93,6 @@ lspconfig.jsonls.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 }
 lspconfig.eslint.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
-
-local null_ls = require("null-ls")
-
-null_ls.setup({
-  on_attach = function(client, _) -- client, bufnr
-    if client.server_capabilities.documentFormattingProvider then
-      -- format on save
-      vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()")
-    end
-
-    if client.server_capabilities.documentRangeFormattingProvider then
-      vim.cmd("xnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.range_formatting({})<CR>")
-    end
-  end,
-})
 
 local prettier = require("prettier")
 
