@@ -68,10 +68,12 @@ local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protoco
 lspconfig.sumneko_lua.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 }
+
 lspconfig.pyright.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 }
 lspconfig.tsserver.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
+
 lspconfig.hls.setup {
   on_attach = on_attach,
   flags = lsp_flags,
@@ -86,13 +88,18 @@ lspconfig.hls.setup {
     }
   }
 }
+
 lspconfig.kotlin_language_server.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 }
+
 lspconfig.jsonls.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 }
+
 lspconfig.eslint.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
+
+lspconfig.elixirls.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 
 local prettier = require("prettier")
 
