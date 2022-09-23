@@ -99,6 +99,14 @@ Plug 'mfussenegger/nvim-dap'
 Plug 'GoNZooo/nvim-dap-ui', { 'branch': 'gonz.fix-nil-index' }
 Plug 'theHamsta/nvim-dap-virtual-text'
 
+"""
+" Language-specific plugins
+"""
+
+" D / DLang
+" Syntax-highlighting
+Plug 'JesseKPhillips/d.vim'
+
 call plug#end()
 
 set mouse=""
