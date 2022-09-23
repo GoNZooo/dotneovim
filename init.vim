@@ -28,6 +28,8 @@ Plug 'saadparwaiz1/cmp_luasnip'
 " Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
+Plug 'p00f/nvim-ts-rainbow'
+
 
 " Misc. motions/text search
 Plug 'easymotion/vim-easymotion'

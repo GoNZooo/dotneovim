@@ -26,6 +26,12 @@ require "nvim-treesitter.configs".setup {
     additional_vim_regex_highlighting = { "org" },
   },
 
+  rainbow = {
+    enable = true,
+    extended_mode = true,
+    max_file_lines = nil,
+  },
+
   playground = {
     enable = true,
     disable = {},
