@@ -4,6 +4,9 @@ call plug#begin('~/.config/nvim/plugged')
 " Misc helper functions (dependency of popular plugins)
 Plug 'nvim-lua/plenary.nvim'
 
+" Which-key
+Plug 'folke/which-key.nvim'
+
 " LSP
 Plug 'junnplus/lsp-setup.nvim'
 Plug 'neovim/nvim-lspconfig'
@@ -98,6 +101,9 @@ Plug 'ldelossa/gh.nvim'
 Plug 'mfussenegger/nvim-dap'
 Plug 'GoNZooo/nvim-dap-ui', { 'branch': 'gonz.fix-nil-index' }
 Plug 'theHamsta/nvim-dap-virtual-text'
+
+" Silly Python bullshit
+Plug 'ahmedkhalf/jupyter-nvim', { 'do': ':UpdateRemotePlugins' }
 
 """
 " Language-specific plugins

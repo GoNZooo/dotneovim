@@ -17,3 +17,5 @@ vim.keymap.set("n", "<leader><leader>S", "<cmd>source ~/.config/nvim/lua/snippet
 vim.keymap.set("n", "<leader><leader>L", "<cmd>source ~/.config/nvim/lua/config.lua<CR>")
 vim.keymap.set("n", "<leader><leader>R", "<cmd>source ~/.config/nvim/init.vim<CR>")
 vim.keymap.set("n", "<leader><TAB>", "<C-6>")
+
+require("which")
