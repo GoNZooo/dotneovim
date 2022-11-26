@@ -14,7 +14,6 @@ require "nvim-treesitter.configs".setup {
     "kotlin",
     "nix",
     "org",
-    "dhall",
   },
 
   sync_install = false,

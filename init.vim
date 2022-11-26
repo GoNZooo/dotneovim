@@ -113,6 +113,9 @@ Plug 'ahmedkhalf/jupyter-nvim', { 'do': ':UpdateRemotePlugins' }
 " Syntax-highlighting
 Plug 'JesseKPhillips/d.vim'
 
+" Dhall
+Plug 'vmchale/dhall-vim'
+
 call plug#end()
 
 set mouse=""
