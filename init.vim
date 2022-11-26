@@ -116,6 +116,9 @@ Plug 'JesseKPhillips/d.vim'
 " Dhall
 Plug 'vmchale/dhall-vim'
 
+" PureScript
+Plug 'purescript-contrib/purescript-vim'
+
 call plug#end()
 
 set mouse=""

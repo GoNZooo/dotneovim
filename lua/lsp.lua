@@ -104,6 +104,10 @@ lspconfig.elixirls.setup { on_attach = on_attach, flags = lsp_flags, capabilitie
 
 lspconfig.serve_d.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 
+lspconfig.purescriptls.setup {
+  on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
+}
+
 local prettier = require("prettier")
 
 prettier.setup({
