@@ -105,7 +105,15 @@ lspconfig.elixirls.setup { on_attach = on_attach, flags = lsp_flags, capabilitie
 lspconfig.serve_d.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 
 lspconfig.purescriptls.setup {
-  on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
+  on_attach = on_attach,
+  flags = lsp_flags,
+  capabilities = capabilities,
+  settings = {
+    ["purescript"] = {
+      ["formatter"] = "tidy",
+      ["addImportOnCompletion"] = true
+    }
+  }
 }
 
 local prettier = require("prettier")
@@ -128,6 +136,7 @@ prettier.setup({
 
 vim.cmd [[autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync()]]
 vim.cmd [[autocmd BufWritePre *.hs lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre *.purs lua vim.lsp.buf.formatting_sync()]]
 -- vim.cmd [[autocmd BufWritePre *.tsx? <Plug>(prettier-format)]]
 -- vim.cmd [[autocmd BufWritePre *.md lua vim.lsp.buf.formatting_sync()]]
 -- vim.cmd [[autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync()]]
