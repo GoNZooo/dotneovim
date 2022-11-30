@@ -8,12 +8,15 @@ cmp.setup({
       local kind = lspkind.cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
       local strings = vim.split(kind.kind, "%s", { trimempty = true })
       kind.kind = " " .. strings[1] .. " "
-      kind.menu = ""
+      kind.menu = "(" .. strings[2] .. ")"
 
       -- If the entry comes via filetype 'purescript' we want to use the module source in the
       -- completion menu.
       if entry.context.filetype == "purescript" then
-        kind.menu = "(" .. entry.completion_item.labelDetails.description .. ")"
+        if entry.completion_item.labelDetails then
+          kind.menu = "(" .. entry.completion_item.labelDetails.description .. ")"
+        else
+        end
       end
 
       return kind
