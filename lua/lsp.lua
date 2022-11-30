@@ -134,12 +134,18 @@ prettier.setup({
   },
 })
 
+-- Lua
 vim.cmd [[autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync()]]
+
+-- Haskell
 vim.cmd [[autocmd BufWritePre *.hs lua vim.lsp.buf.formatting_sync()]]
+
+-- PureScript
 vim.cmd [[autocmd BufWritePre *.purs lua vim.lsp.buf.formatting_sync()]]
--- vim.cmd [[autocmd BufWritePre *.tsx? <Plug>(prettier-format)]]
--- vim.cmd [[autocmd BufWritePre *.md lua vim.lsp.buf.formatting_sync()]]
--- vim.cmd [[autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync()]]
+
+-- Elixir
+vim.cmd [[autocmd BufWritePre *.ex lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre *.exs lua vim.lsp.buf.formatting_sync()]]
 
 local disable_auto_formatting = function()
   vim.cmd [[autocmd WinEnter <buffer> set eventignore+=BufWritePre]]
