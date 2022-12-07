@@ -151,6 +151,9 @@ vim.cmd [[autocmd BufWritePre *.purs lua vim.lsp.buf.formatting_sync()]]
 vim.cmd [[autocmd BufWritePre *.ex lua vim.lsp.buf.formatting_sync()]]
 vim.cmd [[autocmd BufWritePre *.exs lua vim.lsp.buf.formatting_sync()]]
 
+-- Rust
+vim.cmd [[autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync()]]
+
 local disable_auto_formatting = function()
   vim.cmd [[autocmd WinEnter <buffer> set eventignore+=BufWritePre]]
   vim.cmd [[autocmd WinLeave <buffer> set eventignore-=BufWritePre]]
