@@ -106,6 +106,9 @@ Plug 'theHamsta/nvim-dap-virtual-text'
 " Silly Python bullshit
 Plug 'ahmedkhalf/jupyter-nvim', { 'do': ':UpdateRemotePlugins' }
 
+" Comments
+Plug 'numToStr/Comment.nvim'
+
 """
 " Language-specific plugins
 """

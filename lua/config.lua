@@ -19,3 +19,4 @@ vim.keymap.set("n", "<leader><leader>R", "<cmd>source ~/.config/nvim/init.vim<CR
 vim.keymap.set("n", "<leader><TAB>", "<C-6>")
 
 require("which")
+require("comments")
