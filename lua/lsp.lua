@@ -90,10 +90,6 @@ lspconfig.hls.setup {
   }
 }
 
-lspconfig.kotlin_language_server.setup {
-  on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
-}
-
 lspconfig.jsonls.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 }
@@ -119,6 +115,8 @@ lspconfig.purescriptls.setup {
 lspconfig.rust_analyzer.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 }
+
+lspconfig.clangd.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 
 local prettier = require("prettier")
 
@@ -153,6 +151,18 @@ vim.cmd [[autocmd BufWritePre *.exs lua vim.lsp.buf.formatting_sync()]]
 
 -- Rust
 vim.cmd [[autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync()]]
+
+-- C
+vim.cmd [[autocmd BufWritePre *.c lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre *.h lua vim.lsp.buf.formatting_sync()]]
+
+-- C++
+vim.cmd [[autocmd BufWritePre *.cpp lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre *.hpp lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre *.cc lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre *.hh lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre *.cxx lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre *.hxx lua vim.lsp.buf.formatting_sync()]]
 
 local disable_auto_formatting = function()
   vim.cmd [[autocmd WinEnter <buffer> set eventignore+=BufWritePre]]
