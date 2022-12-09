@@ -107,7 +107,8 @@ lspconfig.purescriptls.setup {
   settings = {
     ["purescript"] = {
       ["formatter"] = "tidy",
-      ["addImportOnCompletion"] = true
+      ["addImportOnCompletion"] = true,
+      ["codegenTargets"] = { "corefn" }
     }
   }
 }
