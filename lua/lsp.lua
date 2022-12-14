@@ -98,6 +98,8 @@ lspconfig.eslint.setup { on_attach = on_attach, flags = lsp_flags, capabilities 
 
 lspconfig.elixirls.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 
+lspconfig.erlangls.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
+
 lspconfig.serve_d.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 
 lspconfig.purescriptls.setup {
@@ -145,6 +147,10 @@ vim.cmd [[autocmd BufWritePre *.hs lua vim.lsp.buf.formatting_sync()]]
 
 -- PureScript
 vim.cmd [[autocmd BufWritePre *.purs lua vim.lsp.buf.formatting_sync()]]
+
+-- Erlang
+-- vim.cmd [[autocmd BufWritePre *.erl lua vim.lsp.buf.formatting_sync()]]
+-- vim.cmd [[autocmd BufWritePre *.hrl lua vim.lsp.buf.formatting_sync()]]
 
 -- Elixir
 vim.cmd [[autocmd BufWritePre *.ex lua vim.lsp.buf.formatting_sync()]]
