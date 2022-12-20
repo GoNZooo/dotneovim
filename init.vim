@@ -241,10 +241,6 @@ highlight link GitGutterAdd    GutterSignAdd
 highlight link GitGutterChange GutterSignChange
 highlight link GitGutterDelete GutterSignDelete
 
-" Basic `:Git` mappings
-nmap <leader>GG :Git<CR>
-nmap <leader>GP :Git push<CR>
-
 " Load our lua config
 lua require("config")
 
