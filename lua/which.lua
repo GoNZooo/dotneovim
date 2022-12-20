@@ -14,6 +14,8 @@ whichKey.register(
       p = { "<cmd>Git pull<CR>", "Pull" },
       C = { "<cmd>Git commit<CR>", "Commit" },
       B = { "<cmd>Git blame<CR>", "Blame" },
+      L = { "<cmd>Git log<CR>", "Log" },
+      l = { "<cmd>Telescope git_commits<CR>", "Log" },
     },
   },
   { prefix = "<leader>" }
