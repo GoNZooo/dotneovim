@@ -32,6 +32,7 @@ Plug 'saadparwaiz1/cmp_luasnip'
 " Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'p00f/nvim-ts-rainbow'
 
 
