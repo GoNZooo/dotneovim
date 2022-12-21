@@ -6,6 +6,8 @@ whichKey.register(
       name = "Terminal",
       -- Opens a terminal on the right side of the screen
       t = { "<cmd>rightbelow vnew +terminal<CR>", "Terminal" },
+      -- Opens a new terminal in a new tab
+      T = { "<cmd>tabnew +terminal<CR>", "Terminal Tab" },
     },
     G = {
       name = "git",
