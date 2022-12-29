@@ -110,6 +110,9 @@ Plug 'ahmedkhalf/jupyter-nvim', { 'do': ':UpdateRemotePlugins' }
 " Comments
 Plug 'numToStr/Comment.nvim'
 
+" Indent guides
+Plug 'lukas-reineke/indent-blankline.nvim'
+
 """
 " Language-specific plugins
 """

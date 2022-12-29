@@ -23,3 +23,4 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
 require("which")
 require("comments")
+require("indent_guides")
