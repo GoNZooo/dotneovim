@@ -251,3 +251,6 @@ lua require("config")
 " Enable per-project configurations
 set exrc
 set secure
+
+" Use system clipboard
+set clipboard+=unnamedplus
