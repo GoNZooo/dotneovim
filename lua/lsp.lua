@@ -96,7 +96,13 @@ lspconfig.jsonls.setup {
 
 lspconfig.eslint.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 
-lspconfig.elixirls.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
+lspconfig.elixirls.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities,
+  settings = {
+    ["elixirLS"] = {
+      dialyzerEnabled = true,
+    },
+  },
+}
 
 lspconfig.erlangls.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 
@@ -138,6 +144,10 @@ prettier.setup({
     "typescriptreact",
   },
 })
+
+lspconfig.clojure_lsp.setup {
+  on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
+}
 
 -- Lua
 vim.cmd [[autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync()]]

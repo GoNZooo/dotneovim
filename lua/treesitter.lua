@@ -18,6 +18,7 @@ require "nvim-treesitter.configs".setup {
     "heex",
     "eex",
     "erlang",
+    "clojure",
   },
 
   sync_install = false,
