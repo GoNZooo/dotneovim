@@ -23,6 +23,7 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
 Plug 'onsails/lspkind.nvim'
 
 " Snippets
@@ -126,6 +127,16 @@ Plug 'vmchale/dhall-vim'
 
 " PureScript
 Plug 'purescript-contrib/purescript-vim'
+
+" Lisp/Scheme evaluation (Clojure, Racket, etc.)
+Plug 'Olical/conjure'
+
+" Clojure
+Plug 'guns/vim-sexp',    {'for': 'clojure'}
+Plug 'liquidz/vim-iced', {'for': 'clojure'}
+
+" Common Lisp
+Plug 'vlime/vlime', {'rtp': 'vim/'}
 
 call plug#end()
 
@@ -254,3 +265,6 @@ set secure
 
 " Use system clipboard
 set clipboard+=unnamedplus
+
+" Clojure
+let g:iced_enable_default_key_mappings = v:true

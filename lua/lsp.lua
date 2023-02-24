@@ -57,7 +57,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, bufopts)
   vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, bufopts)
   vim.keymap.set("n", ",,", vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set("n", ",=", vim.lsp.buf.formatting, bufopts)
+  vim.keymap.set("n", ",=", function() vim.lsp.buf.format {async = true} end, bufopts)
 end
 
 local lsp_flags = {
@@ -66,11 +66,11 @@ local lsp_flags = {
 }
 --
 -- Setup lspconfig.
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-lspconfig.sumneko_lua.setup {
-  on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
-}
+-- lspconfig.lua_lsp.setup {
+--   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
+-- }
 
 lspconfig.pyright.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 lspconfig.tsserver.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
@@ -180,6 +180,11 @@ vim.cmd [[autocmd BufWritePre *.cc lua vim.lsp.buf.formatting_sync()]]
 vim.cmd [[autocmd BufWritePre *.hh lua vim.lsp.buf.formatting_sync()]]
 vim.cmd [[autocmd BufWritePre *.cxx lua vim.lsp.buf.formatting_sync()]]
 vim.cmd [[autocmd BufWritePre *.hxx lua vim.lsp.buf.formatting_sync()]]
+
+-- Clojure
+vim.cmd [[autocmd BufWritePre *.clj lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre *.cljs lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre *.cljc lua vim.lsp.buf.formatting_sync()]]
 
 local disable_auto_formatting = function()
   vim.cmd [[autocmd WinEnter <buffer> set eventignore+=BufWritePre]]
