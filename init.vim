@@ -135,9 +135,6 @@ Plug 'Olical/conjure'
 Plug 'guns/vim-sexp',    {'for': 'clojure'}
 Plug 'liquidz/vim-iced', {'for': 'clojure'}
 
-" Common Lisp
-Plug 'vlime/vlime', {'rtp': 'vim/'}
-
 call plug#end()
 
 set mouse=""
