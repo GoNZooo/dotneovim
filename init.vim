@@ -135,6 +135,9 @@ Plug 'Olical/conjure'
 Plug 'guns/vim-sexp',    {'for': 'clojure'}
 Plug 'liquidz/vim-iced', {'for': 'clojure'}
 
+" Racket
+Plug 'wlangstroth/vim-racket'
+
 call plug#end()
 
 set mouse=""
