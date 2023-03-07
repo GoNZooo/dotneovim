@@ -5,8 +5,8 @@ require("github")
 require("table-of-contents").setup()
 require("treesitter")
 require("orgmode").setup({
-  org_agenda_files = { "~/org/*" },
-  org_default_notes_file = "~/org/notes.org",
+  org_agenda_files = { "~/Dropbox/org/*" },
+  org_default_notes_file = "~/Dropbox/org/notes.org",
 })
 require("lsp")
 require("completion")
