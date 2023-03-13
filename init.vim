@@ -138,6 +138,9 @@ Plug 'liquidz/vim-iced', {'for': 'clojure'}
 " Racket
 Plug 'wlangstroth/vim-racket'
 
+" Idris
+Plug 'edwinb/Idris2-vim'
+
 call plug#end()
 
 set mouse=""
