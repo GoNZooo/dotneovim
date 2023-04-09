@@ -259,6 +259,9 @@ highlight link GitGutterAdd    GutterSignAdd
 highlight link GitGutterChange GutterSignChange
 highlight link GitGutterDelete GutterSignDelete
 
+" Unmap `-` for vinegar
+nnoremap - <nop>
+
 " Load our lua config
 lua require("config")
 

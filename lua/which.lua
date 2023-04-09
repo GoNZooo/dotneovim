@@ -21,7 +21,11 @@ whichKey.register(
         l = { "<cmd>Telescope git_commits<CR>", "Log" },
       },
     },
-    ["-"] = { "<cmd>NERDTreeToggle<CR>", "Toggle NERDTree" },
+    ["-"] = {
+      name = "NERDTree",
+      ["-"] = {"<cmd>NERDTreeToggle<CR>", "Toggle NERDTree"},
+      f = {"<cmd>NERDTreeFind<CR>", "Find file in NERDTree"},
+    },
   },
   {}
 )
