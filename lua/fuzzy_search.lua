@@ -20,6 +20,21 @@ require("telescope").setup {
     -- }
     -- Now the picker_config_key will be applied every time you call this
     -- builtin picker
+    buffers = {
+      show_all_buffers = true,
+      sort_lastused = true,
+      theme = "dropdown",
+      previewer = false,
+      mappings = {
+        i = {
+          ["<C-d>"] = "delete_buffer",
+        },
+        n = {
+          dd = "delete_buffer",
+          ["<C-d>"] = "delete_buffer",
+        }
+      }
+    },
   },
   extensions = {
     -- Your extension configuration goes here:

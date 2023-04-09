@@ -1,5 +1,11 @@
 local whichKey = require("which-key")
 
+function createOrOpenFile()
+  local file = vim.fn.input("File name: ")
+  local path = vim.fn.expand("%:p:h") .. "/" .. file
+  vim.cmd("edit " .. path)
+end
+
 whichKey.register(
   {
     ["<leader>"] = {
@@ -22,9 +28,10 @@ whichKey.register(
       },
     },
     ["-"] = {
-      name = "NERDTree",
+      name = "File Tree",
       ["-"] = {"<cmd>NERDTreeToggle<CR>", "Toggle NERDTree"},
       f = {"<cmd>NERDTreeFind<CR>", "Find file in NERDTree"},
+      a = {createOrOpenFile, "Create or open file"},
     },
   },
   {}
