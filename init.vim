@@ -141,6 +141,9 @@ Plug 'wlangstroth/vim-racket'
 " Idris
 Plug 'edwinb/Idris2-vim'
 
+" LFE
+Plug 'lfe-support/vim-lfe'
+
 call plug#end()
 
 set mouse=""

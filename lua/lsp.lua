@@ -72,6 +72,8 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protoc
 --   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 -- }
 
+lspconfig.zls.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
+
 lspconfig.pyright.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 lspconfig.tsserver.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 
@@ -127,6 +129,8 @@ lspconfig.rust_analyzer.setup {
 
 lspconfig.clangd.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 
+lspconfig.lemminx.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
+
 local prettier = require("prettier")
 
 prettier.setup({
@@ -148,6 +152,13 @@ prettier.setup({
 lspconfig.clojure_lsp.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 }
+
+-- lspconfig.lfe_ls.setup {
+--   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
+-- }
+
+-- Zig
+vim.cmd [[autocmd BufWritePre *.zig lua vim.lsp.buf.format {async = true}]]
 
 -- Lua
 vim.cmd [[autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync()]]
