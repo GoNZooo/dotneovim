@@ -130,6 +130,8 @@ lspconfig.clangd.setup { on_attach = on_attach, flags = lsp_flags, capabilities 
 
 lspconfig.lemminx.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 
+lspconfig.ols.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
+
 local prettier = require("prettier")
 
 prettier.setup({
@@ -152,6 +154,10 @@ lspconfig.clojure_lsp.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 }
 
+lspconfig.ocamllsp.setup {
+  on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
+}
+
 -- lspconfig.lfe_ls.setup {
 --   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 -- }
@@ -160,41 +166,48 @@ lspconfig.clojure_lsp.setup {
 vim.cmd [[autocmd BufWritePre *.zig lua vim.lsp.buf.format {async = true}]]
 
 -- Lua
-vim.cmd [[autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre *.lua lua vim.lsp.buf.format {async = true}]]
 
 -- Haskell
-vim.cmd [[autocmd BufWritePre *.hs lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre *.hs lua vim.lsp.buf.format {async = true}]]
 
 -- PureScript
-vim.cmd [[autocmd BufWritePre *.purs lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre *.purs lua vim.lsp.buf.format {async = true}]]
 
 -- Erlang
--- vim.cmd [[autocmd BufWritePre *.erl lua vim.lsp.buf.formatting_sync()]]
--- vim.cmd [[autocmd BufWritePre *.hrl lua vim.lsp.buf.formatting_sync()]]
+-- vim.cmd [[autocmd BufWritePre *.erl lua vim.lsp.buf.format {async = true}]]
+-- vim.cmd [[autocmd BufWritePre *.hrl lua vim.lsp.buf.format {async = true}]]
 
 -- Elixir
-vim.cmd [[autocmd BufWritePre *.ex lua vim.lsp.buf.formatting_sync()]]
-vim.cmd [[autocmd BufWritePre *.exs lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre *.ex lua vim.lsp.buf.format {async = true}]]
+vim.cmd [[autocmd BufWritePre *.exs lua vim.lsp.buf.format {async = true}]]
 
 -- Rust
-vim.cmd [[autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre *.rs lua vim.lsp.buf.format {async = true}]]
 
 -- C
-vim.cmd [[autocmd BufWritePre *.c lua vim.lsp.buf.formatting_sync()]]
-vim.cmd [[autocmd BufWritePre *.h lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre *.c lua vim.lsp.buf.format {async = true}]]
+vim.cmd [[autocmd BufWritePre *.h lua vim.lsp.buf.format {async = true}]]
 
 -- C++
-vim.cmd [[autocmd BufWritePre *.cpp lua vim.lsp.buf.formatting_sync()]]
-vim.cmd [[autocmd BufWritePre *.hpp lua vim.lsp.buf.formatting_sync()]]
-vim.cmd [[autocmd BufWritePre *.cc lua vim.lsp.buf.formatting_sync()]]
-vim.cmd [[autocmd BufWritePre *.hh lua vim.lsp.buf.formatting_sync()]]
-vim.cmd [[autocmd BufWritePre *.cxx lua vim.lsp.buf.formatting_sync()]]
-vim.cmd [[autocmd BufWritePre *.hxx lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre *.cpp lua vim.lsp.buf.format {async = true}]]
+vim.cmd [[autocmd BufWritePre *.hpp lua vim.lsp.buf.format {async = true}]]
+vim.cmd [[autocmd BufWritePre *.cc lua vim.lsp.buf.format {async = true}]]
+vim.cmd [[autocmd BufWritePre *.hh lua vim.lsp.buf.format {async = true}]]
+vim.cmd [[autocmd BufWritePre *.cxx lua vim.lsp.buf.format {async = true}]]
+vim.cmd [[autocmd BufWritePre *.hxx lua vim.lsp.buf.format {async = true}]]
 
 -- Clojure
-vim.cmd [[autocmd BufWritePre *.clj lua vim.lsp.buf.formatting_sync()]]
-vim.cmd [[autocmd BufWritePre *.cljs lua vim.lsp.buf.formatting_sync()]]
-vim.cmd [[autocmd BufWritePre *.cljc lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre *.clj lua vim.lsp.buf.format {async = true}]]
+vim.cmd [[autocmd BufWritePre *.cljs lua vim.lsp.buf.format {async = true}]]
+vim.cmd [[autocmd BufWritePre *.cljc lua vim.lsp.buf.format {async = true}]]
+
+-- OCaml
+vim.cmd [[autocmd BufWritePre *.ml lua vim.lsp.buf.format {async = true}]]
+vim.cmd [[autocmd BufWritePre *.mli lua vim.lsp.buf.format {async = true}]]
+
+-- Odin
+vim.cmd [[autocmd BufWritePre *.odin lua vim.lsp.buf.format {async = true}]]
 
 local disable_auto_formatting = function()
   vim.cmd [[autocmd WinEnter <buffer> set eventignore+=BufWritePre]]

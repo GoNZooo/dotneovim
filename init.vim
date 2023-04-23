@@ -144,6 +144,9 @@ Plug 'edwinb/Idris2-vim'
 " LFE
 Plug 'lfe-support/vim-lfe'
 
+" Odin
+Plug 'Tetralux/odin.vim'
+
 call plug#end()
 
 set mouse=""
