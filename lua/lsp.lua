@@ -208,7 +208,7 @@ vim.cmd [[autocmd BufWritePre *.ml lua vim.lsp.buf.format {async = true}]]
 vim.cmd [[autocmd BufWritePre *.mli lua vim.lsp.buf.format {async = true}]]
 
 -- Odin
-vim.cmd [[autocmd BufWritePre *.odin lua vim.lsp.buf.format {async = true}]]
+-- vim.cmd [[autocmd BufWritePre *.odin lua vim.lsp.buf.format {async = true}]]
 
 local disable_auto_formatting = function()
   vim.cmd [[autocmd WinEnter <buffer> set eventignore+=BufWritePre]]
