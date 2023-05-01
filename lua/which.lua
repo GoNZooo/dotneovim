@@ -34,6 +34,7 @@ whichKey.register(
         L = { "<cmd>source ~/.config/nvim/lua/config.lua<CR>", "Config" },
         R = { "<cmd>source ~/.config/nvim/init.vim<CR>", "Reload" },
       },
+      ["<TAB>"] = {"<C-6>", "Switch to last open buffer"},
     },
     ["-"] = {
       name = "File Tree",
