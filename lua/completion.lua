@@ -50,7 +50,12 @@ cmp.setup({
   }, {
     { name = "buffer" },
     { name = "path" },
-  })
+  }),
+  performance = {
+    debounce = 300,
+    throttle = 60,
+    fetching_timeout = 200,
+  },
 })
 
 -- Set configuration for specific filetype.
