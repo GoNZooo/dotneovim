@@ -26,6 +26,8 @@ vim_colors "gonz-aurora" do
   MatchParen "000", "c3c"
   Search "fff", "00a"
   Visual "000", "7b26cb"
+  Folded "3a3", "555"
+  FoldColumn "0a0", "333"
 
   Todo "cc4" # NeomakeWarning is linked to this.
 

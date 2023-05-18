@@ -78,6 +78,9 @@ Plug 'iCyMind/NeoSolarized'
 Plug 'chriskempson/base16-vim'
 Plug 'GoNZooo/jellybeans.vim'
 
+" HiLinkTrace for debugging colorscheme scopes
+Plug 'gerw/vim-HiLinkTrace'
+
 Plug 'luochen1990/rainbow'
 let g:rainbow_active = 1
 
@@ -277,6 +280,11 @@ set secure
 
 " Use system clipboard
 set clipboard+=unnamedplus
+
+" Folding
+set foldmethod=indent
+set foldlevelstart=99
+set nofoldenable
 
 " Clojure
 let g:iced_enable_default_key_mappings = v:true
