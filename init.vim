@@ -105,7 +105,7 @@ Plug 'ldelossa/gh.nvim'
 
 " Debugging
 Plug 'mfussenegger/nvim-dap'
-Plug 'GoNZooo/nvim-dap-ui', { 'branch': 'gonz.fix-nil-index' }
+Plug 'rcarriga/nvim-dap-ui'
 Plug 'theHamsta/nvim-dap-virtual-text'
 
 " Silly Python bullshit
