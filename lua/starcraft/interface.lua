@@ -80,7 +80,9 @@ function M.go_to_buffer(index)
   vim.api.nvim_set_current_buf(buffer_number)
   vim.api.nvim_buf_set_option(buffer_number, "buflisted", true)
   -- since `bufload` always jumps to the start of the file we need to restore our cursor position
-  vim.cmd("normal! `\"")
+  if vim.fn.line("'\"") > 0 and vim.fn.line("'\"") <= vim.fn.line("$") then
+    vim.cmd("normal! g`\"")
+  end
 end
 
 function M.pick_buffer()
