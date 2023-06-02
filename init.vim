@@ -152,6 +152,8 @@ Plug 'Tetralux/odin.vim'
 
 call plug#end()
 
+packadd termdebug
+
 set mouse=""
 
 " Colorscheme
