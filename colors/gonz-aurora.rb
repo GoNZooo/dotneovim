@@ -28,6 +28,8 @@ vim_colors "gonz-aurora" do
   Visual "000", "7b26cb"
   Folded "3a3", "555"
   FoldColumn "0a0", "333"
+  Whitespace "33313e"
+  NonText "33313e"
 
   Todo "cc4" # NeomakeWarning is linked to this.
 

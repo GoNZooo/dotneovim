@@ -41,6 +41,8 @@ hi Search      guifg=#FFFFFF ctermfg=231  guibg=#0000AA ctermbg=19   gui=NONE ct
 hi Visual      guifg=#000000 ctermfg=16   guibg=#7B26CB ctermbg=92   gui=NONE cterm=NONE
 hi Folded      guifg=#33AA33 ctermfg=71   guibg=#555555 ctermbg=240  gui=NONE cterm=NONE
 hi FoldColumn  guifg=#00AA00 ctermfg=34   guibg=#333333 ctermbg=236  gui=NONE cterm=NONE
+hi Whitespace  guifg=#33313E ctermfg=236  gui=NONE cterm=NONE
+hi NonText     guifg=#33313E ctermfg=236  gui=NONE cterm=NONE
 hi Todo        guifg=#CCCC44 ctermfg=185  gui=NONE cterm=NONE
 hi Pmenu       guifg=#FFFFFF ctermfg=231  guibg=#444444 ctermbg=238  gui=NONE cterm=NONE
 hi PmenuSel    guifg=#444444 ctermfg=238  guibg=#FFFFFF ctermbg=231  gui=NONE cterm=NONE

@@ -1,15 +1,15 @@
-vim.cmd [[highlight IndentBlanklineIndent1 guibg=#2b2b2b gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent2 guibg=#212121 gui=nocombine]]
+vim.opt.list = true
+vim.opt.listchars = {
+  tab = "» ",
+  trail = "·",
+  extends = "❯",
+  precedes = "❮",
+  nbsp = "␣",
+}
 
 require("indent_blankline").setup {
-  char = "",
-  char_highlight_list = {
-    "IndentBlanklineIndent1",
-    "IndentBlanklineIndent2",
-  },
-  space_char_highlight_list = {
-    "IndentBlanklineIndent1",
-    "IndentBlanklineIndent2",
-  },
-  show_trailing_blankline_indent = false,
+  show_end_of_line = false,
+  show_tab = true,
+  show_current_context_start = true,
+  show_current_context = true,
 }

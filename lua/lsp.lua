@@ -1,6 +1,9 @@
 require("nvim-lsp-installer").setup {}
 
 local lspconfig = require("lspconfig")
+local gotoPreview = require("goto-preview")
+
+gotoPreview.setup {}
 
 local opts = { noremap = true, silent = true }
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, opts)
@@ -43,6 +46,7 @@ local on_attach = function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+  vim.keymap.set("n", "gp", gotoPreview.goto_preview_definition, {noremap=true})
   vim.keymap.set("n", "<localleader>r", telescope.lsp_references, bufopts)
   vim.keymap.set("n", "<localleader>S", telescope.lsp_document_symbols, bufopts)
   vim.keymap.set("n", "<localleader>s", telescope.lsp_workspace_symbols, bufopts)
