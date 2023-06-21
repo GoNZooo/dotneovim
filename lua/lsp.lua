@@ -163,6 +163,10 @@ lspconfig.ocamllsp.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 }
 
+lspconfig.gopls.setup {
+  on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
+}
+
 -- lspconfig.lfe_ls.setup {
 --   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 -- }
@@ -213,6 +217,9 @@ vim.cmd [[autocmd BufWritePre *.mli lua vim.lsp.buf.format {async = true}]]
 
 -- Odin
 vim.cmd [[autocmd BufWritePre *.odin lua vim.lsp.buf.format {async = false}]]
+
+-- Go
+vim.cmd [[autocmd BufWritePre *.go lua vim.lsp.buf.format {async = true}]]
 
 local disable_auto_formatting = function()
   vim.cmd [[autocmd WinEnter <buffer> set eventignore+=BufWritePre]]
