@@ -72,13 +72,13 @@ function M.go_to_buffer(index)
   end
 
   local entry = buffer_table[index]
-  local name = entry.name
-  local position = entry.position
-  if name == nil then
+  if entry == nil then
     print("No buffer bound to index " .. index .. ".")
     return
   end
 
+  local name = entry.name
+  local position = entry.position
   local buffer_number = vim.fn.bufnr(name)
 
   if buffer_number == -1 then
