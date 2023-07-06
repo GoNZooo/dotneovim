@@ -19,6 +19,14 @@ function buffer_name(buffer_number)
   return name
 end
 
+function get_current_buffer_and_position()
+  local buffer_number = vim.api.nvim_get_current_buf()
+  local name = buffer_name(buffer_number)
+  local position = vim.fn.getpos(".")
+  local entry = {["name"] = name, ["position"] = position}
+  return entry
+end
+
 function persist_table()
   local table_string = vim.inspect(buffer_table)
   local has_starcraft_directory = vim.fn.isdirectory(".starcraft") == 1
@@ -50,12 +58,12 @@ function M.load_table()
 end
 
 function M.bind_buffer(index)
-  local buffer_number = vim.api.nvim_get_current_buf()
-  local buffer_name = buffer_name(buffer_number)
+  local entry = get_current_buffer_and_position()
+  print(vim.inspect(entry))
   if type(index) ~= "string" then
     index = tostring(index)
   end
-  buffer_table[index] = buffer_name
+  buffer_table[index] = entry
   persist_table()
 end
 
@@ -64,25 +72,28 @@ function M.go_to_buffer(index)
     index = tostring(index)
   end
 
-  local buffer_name = buffer_table[index]
-  if buffer_name == nil then
+  local entry = buffer_table[index]
+  print(vim.inspect(entry))
+  local name = entry.name
+  local position = entry.position
+  print(name)
+  if name == nil then
     print("No buffer bound to index " .. index .. ".")
     return
   end
 
-  local buffer_number = vim.fn.bufnr(buffer_name)
+  local buffer_number = vim.fn.bufnr(name)
 
   if buffer_number == -1 then
-    buffer_number = vim.fn.bufadd(buffer_name)
+    print("loading buffer: '" .. name .. "'")
+    buffer_number = vim.fn.bufadd(name)
+    print("buffer number: " .. buffer_number)
     vim.fn.bufload(buffer_number)
   end
 
   vim.api.nvim_set_current_buf(buffer_number)
-  vim.api.nvim_buf_set_option(buffer_number, "buflisted", true)
-  -- since `bufload` always jumps to the start of the file we need to restore our cursor position
-  if vim.fn.line("'\"") > 0 and vim.fn.line("'\"") <= vim.fn.line("$") then
-    vim.cmd("normal! g`\"")
-  end
+
+  vim.fn.setpos(".", position)
 end
 
 function M.pick_buffer()
