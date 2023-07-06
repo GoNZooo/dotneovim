@@ -59,7 +59,6 @@ end
 
 function M.bind_buffer(index)
   local entry = get_current_buffer_and_position()
-  print(vim.inspect(entry))
   if type(index) ~= "string" then
     index = tostring(index)
   end
@@ -73,10 +72,8 @@ function M.go_to_buffer(index)
   end
 
   local entry = buffer_table[index]
-  print(vim.inspect(entry))
   local name = entry.name
   local position = entry.position
-  print(name)
   if name == nil then
     print("No buffer bound to index " .. index .. ".")
     return
@@ -85,9 +82,7 @@ function M.go_to_buffer(index)
   local buffer_number = vim.fn.bufnr(name)
 
   if buffer_number == -1 then
-    print("loading buffer: '" .. name .. "'")
     buffer_number = vim.fn.bufadd(name)
-    print("buffer number: " .. buffer_number)
     vim.fn.bufload(buffer_number)
   end
 
