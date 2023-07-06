@@ -1,3 +1,13 @@
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+
+parser_config.d2 = {
+  install_info = {
+    url = "~/code/treesitter/tree-sitter-d2",
+    files = { "src/parser.c" },
+  },
+  filetype = "d2",
+}
+
 require "nvim-treesitter.configs".setup {
   ensure_installed = {
     "haskell",
@@ -19,6 +29,7 @@ require "nvim-treesitter.configs".setup {
     "eex",
     "erlang",
     "clojure",
+    "d2",
   },
 
   sync_install = false,
