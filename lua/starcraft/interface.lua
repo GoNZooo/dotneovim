@@ -103,7 +103,7 @@ function M.pick_buffer()
       results = buffer_list,
       entry_maker = function(entry)
         local cwd = vim.fn.getcwd()
-        local displayed_filename = remove_cwd_prefix(cwd, entry.buffer)
+        local displayed_filename = remove_cwd_prefix(cwd, entry.buffer.name)
         local displayed_name = entry.key .. " = " .. displayed_filename
         
         return {
