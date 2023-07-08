@@ -10,7 +10,6 @@ require("orgmode").setup({
 })
 require("lsp")
 require("completion")
-require("debugging")
 require("statusline")
 
 -- Exiting insert mode in the terminal
