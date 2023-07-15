@@ -117,9 +117,6 @@ Plug 'ahmedkhalf/jupyter-nvim', { 'do': ':UpdateRemotePlugins' }
 " Comments
 Plug 'numToStr/Comment.nvim'
 
-" Indent guides
-Plug 'lukas-reineke/indent-blankline.nvim'
-
 """
 " Language-specific plugins
 """
@@ -176,8 +173,8 @@ colorscheme gonz-aurora
 
 " Sane tabs
 " - Two spaces wide
-set tabstop=2
-set softtabstop=2
+set tabstop=4
+set softtabstop=4
 " - Expand them all
 set expandtab
 " - Indent by 2 spaces by default
