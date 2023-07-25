@@ -153,6 +153,9 @@ Plug 'Tetralux/odin.vim'
 " D2
 Plug 'terrastruct/d2-vim'
 
+" Nim
+Plug 'zah/nim.vim'
+
 call plug#end()
 
 packadd termdebug
@@ -178,7 +181,7 @@ set softtabstop=4
 " - Expand them all
 set expandtab
 " - Indent by 2 spaces by default
-set shiftwidth=2
+set shiftwidth=4
 
 " SPACE is leader
 let g:mapleader=' '

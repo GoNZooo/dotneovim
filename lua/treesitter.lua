@@ -30,7 +30,6 @@ require "nvim-treesitter.configs".setup {
     "erlang",
     "clojure",
     "d2",
-    "nim",
   },
 
   sync_install = false,

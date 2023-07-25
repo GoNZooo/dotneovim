@@ -167,7 +167,7 @@ lspconfig.gopls.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 }
 
-lspconfig.nimls.setup {
+lspconfig.nim_langserver.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 }
 
