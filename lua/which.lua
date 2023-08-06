@@ -1,6 +1,7 @@
 local whichKey = require("which-key")
 local language_integration = require("language_integration")
 local starcraft = require("starcraft")
+local todo_comments = require("todo-comments")
 
 function create_or_open_file()
   local file = vim.fn.input("File name: ")
@@ -60,6 +61,11 @@ whichKey.register(
       ["8"] = { function() starcraft.go_to_buffer("8") end, "Go to Starcraft buffer #8" },
       ["9"] = { function() starcraft.go_to_buffer("9") end, "Go to Starcraft buffer #9" },
       ["0"] = { function() starcraft.go_to_buffer("0") end, "Go to Starcraft buffer #10" },
+      T = {
+          name = "TODO comments",
+          a = { function() vim.cmd("TodoTelescope") end, "Show all" },
+          T = { function() vim.cmd("TodoTelescope keywords=TODO,FIX") end, "Search TODO & FIX" },
+      },
     },
     ["-"] = {
       name = "File Tree",
@@ -191,6 +197,14 @@ whichKey.register(
     ["<F10>"] = {function() starcraft.go_to_buffer("F10") end, "Go to Starcraft buffer F10"},
     ["<F11>"] = {function() starcraft.go_to_buffer("F11") end, "Go to Starcraft buffer F11"},
     ["<F12>"] = {function() starcraft.go_to_buffer("F12") end, "Go to Starcraft buffer F12"},
+    ["["] = {
+        name = "Previous",
+        t = {function() todo_comments.jump_prev() end, "Jump to previous TODO comment"},
+    },
+    ["]"] = {
+        name = "Next",
+        t = {function() todo_comments.jump_next() end, "Jump to next TODO comment"},
+    },
   },
   {}
 )

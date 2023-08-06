@@ -39,6 +39,8 @@ Plug 'nvim-treesitter/playground'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'p00f/nvim-ts-rainbow'
 
+" TODO comments
+Plug 'doongjohn/todo-comments.nvim'
 
 " Misc. motions/text search
 Plug 'easymotion/vim-easymotion'
