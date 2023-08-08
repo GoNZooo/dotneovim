@@ -17,18 +17,9 @@ local telescope = require("telescope.builtin")
 local null_ls = require("null-ls")
 
 null_ls.setup({
-  on_attach = function(client, _) -- client, bufnr
-    if client.server_capabilities.documentFormattingProvider then
-      -- format on save
-      vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()")
-    end
-
-    if client.server_capabilities.documentRangeFormattingProvider then
-      vim.cmd("xnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.range_formatting({})<CR>")
-    end
-  end,
   sources = {
     null_ls.builtins.formatting.black.with({ extra_args = { "--fast" } }),
+    null_ls.builtins.formatting.prettierd,
   },
 })
 
@@ -37,8 +28,8 @@ null_ls.setup({
 local on_attach = function(client, bufnr)
   -- Disable formatting for tsserver (this should be handled by null-ls)
   if client.name == "tsserver" then
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
   end
 
   -- Mappings.
@@ -136,24 +127,6 @@ lspconfig.clangd.setup { on_attach = on_attach, flags = lsp_flags, capabilities 
 lspconfig.lemminx.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 
 lspconfig.ols.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
-
-local prettier = require("prettier")
-
-prettier.setup({
-  bin = "prettierd",
-  filetypes = {
-    "css",
-    "graphql",
-    "html",
-    "javascript",
-    "javascriptreact",
-    "less",
-    "markdown",
-    "scss",
-    "typescript",
-    "typescriptreact",
-  },
-})
 
 lspconfig.clojure_lsp.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
