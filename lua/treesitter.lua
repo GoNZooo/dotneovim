@@ -8,6 +8,15 @@ parser_config.d2 = {
   filetype = "d2",
 }
 
+-- parser_config.odin = {
+--   install_info = {
+--     url = "https://github.com/ap29600/tree-sitter-odin",
+--     branch = 'main',
+--     files = {"src/parser.c"}
+--   },
+--   filetype = "odin",
+-- }
+
 require "nvim-treesitter.configs".setup {
   ensure_installed = {
     "haskell",
@@ -30,6 +39,7 @@ require "nvim-treesitter.configs".setup {
     "erlang",
     "clojure",
     "d2",
+    "odin",
   },
 
   sync_install = false,

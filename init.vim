@@ -37,6 +37,8 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/playground'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
+Plug 'ap29600/tree-sitter-odin'
+
 " TODO comments
 Plug 'doongjohn/todo-comments.nvim'
 
