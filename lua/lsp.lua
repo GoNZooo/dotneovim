@@ -20,6 +20,7 @@ null_ls.setup({
   sources = {
     null_ls.builtins.formatting.black.with({ extra_args = { "--fast" } }),
     null_ls.builtins.formatting.prettierd,
+    null_ls.builtins.formatting.golines.with({ extra_args = { "--base-formatter=gofumpt" } }),
   },
 })
 
