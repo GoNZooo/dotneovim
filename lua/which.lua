@@ -73,11 +73,6 @@ whichKey.register(
       f = {"<cmd>NERDTreeFind<CR>", "Find file in NERDTree"},
       a = {create_or_open_file, "Create or open file"},
     },
-    ["<localleader>"] = {
-      name = "Language integration",
-      c = { language_integration.compile, "Compile" },
-      t = { language_integration.run_tests, "Run tests" },
-    },
     ["<C-h>"] = { "<C-w>h", "Move to left window" },
     ["<C-j>"] = { "<C-w>j", "Move to bottom window" },
     ["<C-k>"] = { "<C-w>k", "Move to top window" },
