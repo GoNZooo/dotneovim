@@ -64,9 +64,7 @@ Plug 'nvim-lualine/lualine.nvim'
 set laststatus=2
 
 " File browsing, enhanced netrw
-Plug 'tpope/vim-vinegar'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'stevearc/oil.nvim'
 
 " Jump to last position when reopening files
 Plug 'farmergreg/vim-lastplace'

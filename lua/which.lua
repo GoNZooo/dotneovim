@@ -69,8 +69,7 @@ whichKey.register(
     },
     ["-"] = {
       name = "File Tree",
-      ["-"] = {"<cmd>NERDTreeToggle<CR>", "Toggle NERDTree"},
-      f = {"<cmd>NERDTreeFind<CR>", "Find file in NERDTree"},
+      ["-"] = {"<cmd>Oil<CR>", "Open Oil in current directory"},
       a = {create_or_open_file, "Create or open file"},
     },
     ["<C-h>"] = { "<C-w>h", "Move to left window" },
