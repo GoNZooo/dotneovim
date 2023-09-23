@@ -2,36 +2,10 @@ local cmp = require("cmp")
 local lspkind = require("lspkind")
 
 cmp.setup({
-  formatting = {
-    fields = { "kind", "abbr", "menu" },
-    format = function(entry, vim_item)
-      local kind = lspkind.cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
-      local strings = vim.split(kind.kind, "%s", { trimempty = true })
-      kind.kind = " " .. strings[1] .. " "
-      if strings[2] then
-        kind.menu = "(" .. strings[2] .. ")"
-      end
-
-      -- If the entry comes via filetype 'purescript' we want to use the module source in the
-      -- completion menu.
-      if entry.context.filetype == "purescript" then
-        if entry.completion_item.labelDetails then
-          kind.menu = "(" .. entry.completion_item.labelDetails.description .. ")"
-        else
-        end
-      end
-
-      return kind
-    end,
-  },
   snippet = {
     expand = function(args)
       require("luasnip").lsp_expand(args.body)
     end,
-  },
-  window = {
-    -- completion = cmp.config.window.bordered(),
-    -- documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
