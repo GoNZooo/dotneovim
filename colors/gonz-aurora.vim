@@ -23,7 +23,7 @@ hi Comment     guifg=#46F2F2 ctermfg=87   gui=NONE cterm=NONE
 hi Statement   guifg=#E12977 ctermfg=162  gui=NONE cterm=NONE
 hi Include     guifg=#C5E400 ctermfg=184  gui=NONE cterm=NONE
 hi PreProc     guifg=#CC4444 ctermfg=167  gui=NONE cterm=NONE
-hi Delimiter   guifg=#882255 ctermfg=89   gui=NONE cterm=NONE
+hi Delimiter   guifg=#F967E7 ctermfg=206  gui=NONE cterm=NONE
 hi Type        guifg=#4477FF ctermfg=69   gui=NONE cterm=NONE
 hi Constant    guifg=#5F9CFF ctermfg=75   gui=NONE cterm=NONE
 hi String      guifg=#FFB700 ctermfg=214  gui=NONE cterm=NONE

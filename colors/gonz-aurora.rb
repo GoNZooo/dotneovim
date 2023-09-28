@@ -10,7 +10,7 @@ vim_colors "gonz-aurora" do
 	Statement "e12977"
   Include "c5e400"
   PreProc "c44"
-	Delimiter "825"
+	Delimiter "f967e7"
 	Type "47f"
   Constant "5f9cff"
 	String "ffb700"
