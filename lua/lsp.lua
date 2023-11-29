@@ -145,6 +145,10 @@ lspconfig.nim_langserver.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 }
 
+lspconfig.asm_lsp.setup {
+  on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
+}
+
 -- lspconfig.lfe_ls.setup {
 --   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 -- }
@@ -201,6 +205,9 @@ vim.cmd [[autocmd BufWritePre *.go lua vim.lsp.buf.format {async = true}]]
 
 -- Nim
 vim.cmd [[autocmd BufWritePre *.nim lua vim.lsp.buf.format {async = true}]]
+
+-- Assembly
+vim.cmd [[autocmd BufWritePre *.asm lua vim.lsp.buf.format {async = true}]]
 
 local disable_auto_formatting = function()
   vim.cmd [[autocmd WinEnter <buffer> set eventignore+=BufWritePre]]
