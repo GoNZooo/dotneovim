@@ -18,16 +18,28 @@ if has("gui_running")
     set background=dark
 endif
 
-hi Normal      guifg=#ECECEC ctermfg=255  guibg=#23212E ctermbg=235  gui=NONE cterm=NONE
+let c_field = "#FF66CC"
+let c_variable = "#9999FF"
+let c_type = "#5577FF"
+let c_function = "#C5E400"
+let c_delimiter = "#DD5555"
+
+hi Normal      guifg=#ECECEC ctermfg=255  guibg=#191919 ctermbg=235  gui=NONE cterm=NONE
 hi Comment     guifg=#46F2F2 ctermfg=87   gui=NONE cterm=NONE
 hi Statement   guifg=#E12977 ctermfg=162  gui=NONE cterm=NONE
 hi Include     guifg=#C5E400 ctermfg=184  gui=NONE cterm=NONE
 hi PreProc     guifg=#CC4444 ctermfg=167  gui=NONE cterm=NONE
-hi Delimiter   guifg=#F967E7 ctermfg=206  gui=NONE cterm=NONE
-hi Type        guifg=#4477FF ctermfg=69   gui=NONE cterm=NONE
+exec("hi Delimiter   guifg=" . c_delimiter . " ctermfg=206  gui=NONE cterm=NONE")
+exec("hi @punctuation guifg=" . c_delimiter . " ctermfg=206  gui=NONE cterm=NONE")
+exec("hi Type        guifg=" . c_type . " ctermfg=69   gui=NONE cterm=NONE")
+exec("hi @type       guifg=" . c_type . " ctermfg=69   gui=NONE cterm=NONE")
+exec("hi @variable   guifg=" . c_variable . " ctermfg=69   gui=NONE cterm=NONE")
+exec("hi @parameter  guifg=" . c_variable . " ctermfg=69   gui=NONE cterm=NONE")
+exec("hi @field      guifg=" . c_field . " ctermfg=69   gui=NONE cterm=NONE")
 hi Constant    guifg=#5F9CFF ctermfg=75   gui=NONE cterm=NONE
 hi String      guifg=#FFB700 ctermfg=214  gui=NONE cterm=NONE
-hi Function    guifg=#C5E400 ctermfg=184  gui=NONE cterm=NONE
+exec("hi Function    guifg=" . c_function . " ctermfg=184  gui=NONE cterm=NONE")
+exec("hi @function   guifg=" . c_function . " ctermfg=184  gui=NONE cterm=NONE")
 hi Identifier  guifg=#8888CC ctermfg=104  gui=NONE cterm=NONE
 hi LineNr      guifg=#444444 ctermfg=238  gui=NONE cterm=NONE
 hi DiffDelete  guifg=#0A0A0A ctermfg=232  guibg=#CC0000 ctermbg=160  gui=NONE cterm=NONE

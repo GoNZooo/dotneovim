@@ -1,22 +1,22 @@
 vim_colors "gonz-aurora" do
-	author "Rickard Andersson"
-	notes "gonz' color scheme"
+  author "Rickard Andersson"
+  notes "gonz' color scheme"
 
-	reset true
-	background :dark
+  reset true
+  background :dark
 
-	Normal "ececec", "23212e" 
-	Comment "46f2f2"
-	Statement "e12977"
+  Normal "ececec", "23212e" 
+  Comment "46f2f2"
+  Statement "e12977"
   Include "c5e400"
   PreProc "c44"
-	Delimiter "f967e7"
-	Type "47f"
+  Delimiter "f967e7"
+  Type "47f"
   Constant "5f9cff"
-	String "ffb700"
+  String "ffb700"
   Function "c5e400"
-	Identifier "88c"
-	LineNr "444"
+  Identifier "88c"
+  LineNr "444"
   DiffDelete "0a0a0a", "c00"
   DiffAdd "0a0a0a", "0c0"
   DiffChange "0a0a0a", "c0c"
@@ -36,13 +36,13 @@ vim_colors "gonz-aurora" do
   # autocomplete menu
   Pmenu "fff", "444"
   PmenuSel "444", "fff"
-
+  
   # ALE
   link :ALEWarning, :to => :Underlined
   link :ALEError, :to => :Underlined
-
+  
   # Language specific
-
+  
   ##########
   # Elixir #
   ##########
@@ -56,7 +56,7 @@ vim_colors "gonz-aurora" do
   link :elixirDefine, :to => :elixirKeyword
   link :elixirTupleDelimiter, :to => :Delimiter
   link :elixirMapDelimiter, :to => :Delimiter
-
+  
   # OCaml #
   link :ocamlConstructor, :to => :Type
 end
