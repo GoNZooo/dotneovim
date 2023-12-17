@@ -1,0 +1,38 @@
+clear = true
+background = dark
+
+Normal: "ececec", "191919"
+Comment: "46f2f2"
+Statement: "e12977"
+Include: "c5e400"
+PreProc: "cc4444"
+Delimiter: "dd5555"
+Type: "5577ff"
+@field: "ff66cc"
+Constant: "5f9cff"
+String: "ffb700"
+Function: "c5e400"
+Identifier: "9999ff"
+LineNr: "444444"
+DiffDelete: "0a0a0a", "cc0000"
+DiffAdd: "0a0a0a", "00cc00"
+DiffChange: "0a0a0a", "cc00cc"
+DiffText: "000000", "ffffff"
+ColorColumn: "ececec", "33313e"
+CursorLine: "cccccc", "222222"
+MatchParen: "000000", "cc33cc"
+Search: "ffffff", "0000aa"
+Visual: "000000", "7b26cb"
+Folded: "33aa33", "555555"
+FoldColumn: "00aa00", "333333"
+Whitespace: "404040"
+NonText: "33313e"
+Todo: "cccc44"
+Pmenu: "ffffff", "444444"
+PmenuSel: "444444", "ffffff"
+
+@punctuation: Delimiter
+@type: Type
+@variable: Identifier
+@parameter: Identifier
+@function: Function
