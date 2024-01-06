@@ -153,8 +153,8 @@ Plug 'Tetralux/odin.vim'
 " D2
 Plug 'terrastruct/d2-vim'
 
-" Nim
-Plug 'zah/nim.vim'
+" F#
+Plug 'adelarsq/neofsharp.vim'
 
 call plug#end()
 

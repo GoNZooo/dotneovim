@@ -149,6 +149,10 @@ lspconfig.asm_lsp.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 }
 
+lspconfig.fsautocomplete.setup {
+  on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
+}
+
 -- lspconfig.lfe_ls.setup {
 --   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 -- }
