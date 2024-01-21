@@ -36,3 +36,4 @@ PmenuSel: "444444", "ffffff"
 @variable: Identifier
 @parameter: Identifier
 @function: Function
+@lsp.type.property: @field
