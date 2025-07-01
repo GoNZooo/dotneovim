@@ -55,7 +55,7 @@ Plug 'airblade/vim-gitgutter'
 
 " Fuzzy searching
 Plug 'nvim-telescope/telescope-fzf-native.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'powerman/vim-plugin-AnsiEsc'
 
@@ -228,8 +228,13 @@ if has("autocmd")
 " See: http://vimcasts.org/episodes/the-edit-command/
 cnoremap %% <C-R>=fnameescape(expand('%:p:h'))."/"<CR>
 " %rc expands to vimrc
-cnoremap %rc ~/.config/nvim/init.vim
-cnoremap %ll ~/.config/nvim/lua/config.lua
+if has("win64")
+    cnoremap %rc ~/AppData/Local/nvim/init.vim
+    cnoremap %ll ~/AppData/Local/nvim/lua/config.lua
+else
+    cnoremap %rc ~/.config/nvim/init.vim
+    cnoremap %ll ~/.config/nvim/lua/config.lua
+endif
 
 map <leader>cd :lcd %:p:h<CR>
 
