@@ -141,10 +141,6 @@ lspconfig.gopls.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 }
 
-lspconfig.nim_langserver.setup {
-  on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
-}
-
 lspconfig.asm_lsp.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 }
@@ -202,13 +198,10 @@ vim.cmd [[autocmd BufWritePre *.ml lua vim.lsp.buf.format {async = true}]]
 vim.cmd [[autocmd BufWritePre *.mli lua vim.lsp.buf.format {async = true}]]
 
 -- Odin
-vim.cmd [[autocmd BufWritePre *.odin lua vim.lsp.buf.format {async = false}]]
+--vim.cmd [[autocmd BufWritePre *.odin lua vim.lsp.buf.format {async = false}]]
 
 -- Go
 vim.cmd [[autocmd BufWritePre *.go lua vim.lsp.buf.format {async = true}]]
-
--- Nim
-vim.cmd [[autocmd BufWritePre *.nim lua vim.lsp.buf.format {async = true}]]
 
 -- Assembly
 vim.cmd [[autocmd BufWritePre *.asm lua vim.lsp.buf.format {async = true}]]
