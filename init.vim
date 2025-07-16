@@ -206,7 +206,7 @@ set smartcase
 map <CR> :noh<CR>
 
 " Set highlight for column 100
-set colorcolumn=80,100
+set colorcolumn=80,100,120
 
 " highlight cursor position
 " set cursorline
@@ -256,7 +256,7 @@ imap § <Esc>
 vmap § <Esc>
 
 " Use easymotion
-nmap <leader>s <Plug>(easymotion-s2)
+"nmap <leader>s <Plug>(easymotion-s2)
 map / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 
