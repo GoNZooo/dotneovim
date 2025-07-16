@@ -40,8 +40,8 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
   vim.keymap.set("n", "gp", gotoPreview.goto_preview_definition, {noremap=true})
   vim.keymap.set("n", "<localleader>r", telescope.lsp_references, bufopts)
-  vim.keymap.set("n", "<localleader>S", telescope.lsp_document_symbols, bufopts)
-  vim.keymap.set("n", "<localleader>s", telescope.lsp_workspace_symbols, bufopts)
+  vim.keymap.set("n", "<leader>s", telescope.lsp_document_symbols, bufopts)
+  vim.keymap.set("n", "<leader>S", telescope.lsp_workspace_symbols, bufopts)
   vim.keymap.set("n", "<localleader>d", telescope.diagnostics, bufopts)
   vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
   vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
@@ -53,7 +53,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, bufopts)
   vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, bufopts)
   vim.keymap.set("n", ",,", vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set("n", ",=", function() vim.lsp.buf.format {async = true} end, bufopts)
+  vim.keymap.set("n", "<leader>=", function() vim.lsp.buf.format {async = true} end, bufopts)
 end
 
 local lsp_flags = {
@@ -68,86 +68,86 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protoc
 --   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 -- }
 
-lspconfig.zls.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
+--lspconfig.zls.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 
-lspconfig.pyright.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
-lspconfig.tsserver.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
+--lspconfig.pyright.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
+--lspconfig.tsserver.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 
-lspconfig.hls.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
-  settings = {
-    ["haskell"] = {
-      plugin = {
-        tactics = {
-          globalOn = false,
-        },
-      }
-    }
-  }
-}
+-- lspconfig.hls.setup {
+--   on_attach = on_attach,
+--   flags = lsp_flags,
+--   capabilities = capabilities,
+--   settings = {
+--     ["haskell"] = {
+--       plugin = {
+--         tactics = {
+--           globalOn = false,
+--         },
+--       }
+--     }
+--   }
+-- }
 
 lspconfig.jsonls.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 }
 
-lspconfig.eslint.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
+--lspconfig.eslint.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 
-lspconfig.elixirls.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities,
-  settings = {
-    ["elixirLS"] = {
-      dialyzerEnabled = true,
-    },
-  },
-}
+-- lspconfig.elixirls.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities,
+--   settings = {
+--     ["elixirLS"] = {
+--       dialyzerEnabled = true,
+--     },
+--   },
+-- }
 
-lspconfig.erlangls.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
+--lspconfig.erlangls.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 
-lspconfig.serve_d.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
+--lspconfig.serve_d.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 
-lspconfig.purescriptls.setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities,
-  settings = {
-    ["purescript"] = {
-      ["formatter"] = "tidy",
-      ["addImportOnCompletion"] = true,
-      ["codegenTargets"] = { "corefn" }
-    }
-  }
-}
+-- lspconfig.purescriptls.setup {
+--   on_attach = on_attach,
+--   flags = lsp_flags,
+--   capabilities = capabilities,
+--   settings = {
+--     ["purescript"] = {
+--       ["formatter"] = "tidy",
+--       ["addImportOnCompletion"] = true,
+--       ["codegenTargets"] = { "corefn" }
+--     }
+--   }
+-- }
 
-lspconfig.rust_analyzer.setup {
-  on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
-}
+-- lspconfig.rust_analyzer.setup {
+--   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
+-- }
 
-lspconfig.clangd.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
+--lspconfig.clangd.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 
-lspconfig.lemminx.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
+--lspconfig.lemminx.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 
 lspconfig.ols.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 
-lspconfig.clojure_lsp.setup {
-  on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
-}
+-- lspconfig.clojure_lsp.setup {
+--   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
+-- }
 
-lspconfig.ocamllsp.setup {
-  on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
-}
+-- lspconfig.ocamllsp.setup {
+--   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
+-- }
 
 lspconfig.gopls.setup {
   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
 }
 
-lspconfig.asm_lsp.setup {
-  on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
-}
+-- lspconfig.asm_lsp.setup {
+--   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
+-- }
 
-lspconfig.fsautocomplete.setup {
-  on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
-}
+-- lspconfig.fsautocomplete.setup {
+--   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities
+-- }
 
 -- lspconfig.lfe_ls.setup {
 --   on_attach = on_attach, flags = lsp_flags, capabilities = capabilities

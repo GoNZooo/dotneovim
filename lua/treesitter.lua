@@ -19,26 +19,6 @@ parser_config.d2 = {
 
 require "nvim-treesitter.configs".setup {
   ensure_installed = {
-    "haskell",
-    "rust",
-    "lua",
-    "python",
-    "javascript",
-    "typescript",
-    "html",
-    "css",
-    "json",
-    "markdown",
-    "yaml",
-    "kotlin",
-    "nix",
-    "org",
-    "elixir",
-    "heex",
-    "eex",
-    "erlang",
-    "clojure",
-    "d2",
     "odin",
   },
 
