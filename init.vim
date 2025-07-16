@@ -269,6 +269,13 @@ set switchbuf=usetab
 set exrc
 set secure
 
+if has("win64")
+    set shell=cmd.exe
+    set shellcmdflag=/c
+    set shellquote="
+    set shellxquote=
+endif
+
 " completion list
 " inoremap <expr><tab> pumvisible() ? "\<c-y>" : "\<tab>"
 " imap <expr><c-j> pumvisible() ? "\<c-n>" : "\<c-j>"
