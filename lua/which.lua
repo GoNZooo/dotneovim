@@ -2,6 +2,7 @@ local whichKey = require("which-key")
 local language_integration = require("language_integration")
 local starcraft = require("starcraft")
 local todo_comments = require("todo-comments")
+local build_command = require("build-command")
 
 function create_or_open_file()
   local file = vim.fn.input("File name: ")
@@ -9,10 +10,12 @@ function create_or_open_file()
   vim.cmd("edit " .. path)
 end
 
--- vim.api.nvim_del_keymap("n", "'")
-
 whichKey.register(
   {
+    ["<localleader>"] = {
+        B = { function() build_command.select_build_command() end, "Select Build Command" },
+        b = { function() build_command.run_last_command() end, "Run Last Build Command" },
+    },
     ["<leader>"] = {
       t = {
         name = "Terminal",

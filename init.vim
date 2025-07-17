@@ -102,6 +102,10 @@ let g:copilot_filetypes = {
       \ '*': v:true
       \ }
 
+let g:copilot_enabled=v:false
+
+inoremap <C-a> <Plug>(copilot-suggest)
+
 " GitHub
 Plug 'ldelossa/litee.nvim'
 Plug 'ldelossa/gh.nvim'
