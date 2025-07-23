@@ -58,6 +58,7 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'powerman/vim-plugin-AnsiEsc'
+let g:no_plugin_maps = v:true
 
 " Statusline
 Plug 'nvim-lualine/lualine.nvim'

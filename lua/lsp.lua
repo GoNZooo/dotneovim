@@ -14,16 +14,6 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, opts)
 
 local telescope = require("telescope.builtin")
 
-local null_ls = require("null-ls")
-
-null_ls.setup({
-  sources = {
-    null_ls.builtins.formatting.black.with({ extra_args = { "--fast" } }),
-    null_ls.builtins.formatting.prettierd,
-    null_ls.builtins.formatting.golines.with({ extra_args = { "--base-formatter=gofumpt" } }),
-  },
-})
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -36,12 +26,12 @@ local on_attach = function(client, bufnr)
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
-  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
+  -- vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+  -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
   vim.keymap.set("n", "gp", gotoPreview.goto_preview_definition, {noremap=true})
   vim.keymap.set("n", "<localleader>r", telescope.lsp_references, bufopts)
-  vim.keymap.set("n", "<leader>s", telescope.lsp_document_symbols, bufopts)
-  vim.keymap.set("n", "<leader>S", telescope.lsp_workspace_symbols, bufopts)
+  -- vim.keymap.set("n", "<leader>s", telescope.lsp_document_symbols, bufopts)
+  -- vim.keymap.set("n", "<leader>S", telescope.lsp_workspace_symbols, bufopts)
   vim.keymap.set("n", "<localleader>d", telescope.diagnostics, bufopts)
   vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
   vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
@@ -72,6 +62,7 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protoc
 
 --lspconfig.pyright.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 --lspconfig.tsserver.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
+lspconfig.gopls.setup { on_attach = on_attach, flags = lsp_flags, capabilities = capabilities }
 
 -- lspconfig.hls.setup {
 --   on_attach = on_attach,
@@ -201,7 +192,7 @@ vim.cmd [[autocmd BufWritePre *.mli lua vim.lsp.buf.format {async = true}]]
 --vim.cmd [[autocmd BufWritePre *.odin lua vim.lsp.buf.format {async = false}]]
 
 -- Go
-vim.cmd [[autocmd BufWritePre *.go lua vim.lsp.buf.format {async = true}]]
+vim.cmd [[autocmd BufWritePre *.go lua vim.lsp.buf.format {async = false}]]
 
 -- Assembly
 vim.cmd [[autocmd BufWritePre *.asm lua vim.lsp.buf.format {async = true}]]

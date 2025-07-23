@@ -3,11 +3,21 @@ local language_integration = require("language_integration")
 local starcraft = require("starcraft")
 local todo_comments = require("todo-comments")
 local build_command = require("build-command")
+local tag_picker = require("tag_picker")
+local telescope = require("telescope.builtin")
 
 function create_or_open_file()
-  local file = vim.fn.input("File name: ")
-  local path = vim.fn.expand("%:p:h") .. "/" .. file
-  vim.cmd("edit " .. path)
+    local file = vim.fn.input("File name: ")
+    local path = vim.fn.expand("%:p:h") .. "/" .. file
+    vim.cmd("edit " .. path)
+end
+
+function telescope_buffer_tags()
+    return telescope.current_buffer_tags({ctags_file = "tags", show_kind = false})
+end
+
+function telescope_all_tags()
+    return telescope.tags({ctags_file = "tags", show_kind = false})
 end
 
 whichKey.register(
@@ -34,6 +44,8 @@ whichKey.register(
         L = { "<cmd>Git log<CR>", "Log" },
         l = { "<cmd>Telescope git_commits<CR>", "Log" },
       },
+      s = {telescope_buffer_tags,  "Search tags for buffer"},
+      S = {tag_picker.tag_search_picker,  "Search tags"},
       ["<leader>"] = {
         name = "Source files",
         S = { "<cmd>source ~/.config/nvim/lua/snippets.lua<CR>", "Snippets" },

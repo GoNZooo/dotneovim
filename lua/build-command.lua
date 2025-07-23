@@ -2,6 +2,7 @@ local M = {}
 
 M.last_build_command = {}
 M.marks = {}
+M.namespace_id = 0
 
 function load_configurations()
     -- Configurations are stored in `$cwd/build-commands.lua`
@@ -125,20 +126,32 @@ function M.run_build_command(command_spec)
         if i ~= #command_spec.commands then
             all_output = all_output .. "\n\n"
         end
+
+        local has_error = vim.v.shell_error ~= 0
+        if has_error then
+            -- break from our loop, we don't need to run more commands, but we want to display the
+            -- errors we have
+            vim.api.nvim_err_writeln("Command failed: " .. cmd.command)
+            break
+        end
+    end
+
+    if M.namespace_id == 0 then
+        M.namespace_id = vim.api.nvim_create_namespace("build_errors")
+    end
+
+    if #M.marks > 0 then
+        for _, mark in ipairs(M.marks) do
+            vim.api.nvim_buf_del_extmark(mark.bufnr, M.namespace_id, mark.id)
+        end
     end
 
     if #errors > 0 then
         vim.fn.setqflist({}, ' ', { title = "Build Errors", items = errors })
-        local namespace_id = vim.api.nvim_create_namespace("build_errors")
-        if #M.marks > 0 then
-            for _, mark in ipairs(M.marks) do
-                vim.api.nvim_buf_del_extmark(mark.bufnr, namespace_id, mark.id)
-            end
-        end
         for _, error in ipairs(errors) do
             local bufnr = vim.fn.bufnr(error.filename)
             if bufnr ~= -1 then
-                local mark_id = vim.api.nvim_buf_set_extmark(bufnr, namespace_id, error.lnum - 1, 0, {
+                local mark_id = vim.api.nvim_buf_set_extmark(bufnr, M.namespace_id, error.lnum - 1, 0, {
                     virt_text = {{error.text, "Error"}},
                     virt_text_pos = "eol",
                     hl_mode = "combine",
@@ -175,12 +188,12 @@ function M.run_build_command(command_spec)
 end
 
 function M.run_last_command()
-    if not M.last_build_command or M.last_build_command == "" then
+    if not M.last_build_command then
         vim.api.nvim_err_writeln("No last build command found. Please select a build command first.")
         return
     end
 
-    M.run_build_command(M.last_build_command.command, M.last_build_command.error_pattern)
+    M.run_build_command(M.last_build_command)
 end
 
 return M

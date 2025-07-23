@@ -18,8 +18,8 @@ vim.o.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
 vim.o.shellquote = ""
 vim.o.shellxquote = ""
 
-require("which")
 require("comments")
 require("indent_guides")
 require("file-browsing")
 require("build-command")
+require("which")
