@@ -12,6 +12,60 @@ require("file-browsing")
 require("build-command")
 require("lsp")
 
+local TERM_VALUE = vim.env.TERM or ""
+if TERM_VALUE ~= "rxvt-unicode-256color" then
+    vim.opt.termguicolors = true
+end
+
+-- colorscheme gonz-aurora
+vim.cmd([[ colorscheme gonz-aurora ]])
+
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 4
+
+vim.opt.mouse = ""
+
+vim.opt.background = "dark"
+vim.cmd([[ syntax enable ]])
+vim.cmd([[ filetype plugin indent on ]])
+
+-- SPACE is leader
+vim.g.mapleader = " "
+-- , is localleader
+vim.g.maplocalleader = ","
+-- Tilde is ESC in insert mode
+vim.keymap.set("i", "§", "<Esc>", { noremap = true, silent = true })
+
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.encoding = "utf-8"
+
+-- Highlight search results
+vim.opt.hlsearch = true
+-- Incremental search, search as you type
+vim.opt.incsearch = true
+-- Ignore case when searching
+vim.opt.ignorecase = true
+-- Ignore case when searching lowercase
+vim.opt.smartcase = true
+
+-- Stop highlighting on Enter
+function nohlsearch()
+    vim.cmd("nohlsearch")
+end
+vim.keymap.set("n", "<CR>", nohlsearch, { noremap = true, silent = true })
+
+-- " Set highlight for column 80,100,120
+-- set colorcolumn=80,100,120
+vim.opt.colorcolumn = "80,100,120"
+
+-- highlight cursorposition
+vim.opt.cursorcolumn = true
+-- Show 2 lines away from cursor
+vim.opt.scrolloff = 2
+
 -- Expansions
 --
 -- %% expands to current path, all thanks to Gary Bernhardt & Drew Neil

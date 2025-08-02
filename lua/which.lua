@@ -10,8 +10,7 @@ function create_or_open_file()
     vim.cmd("edit " .. path)
 end
 
-local which_key_spec = 
-  {
+local which_key_spec = {
     { "-", group = "File Tree" },
     { "--", "<cmd>Oil<CR>", desc = "Open Oil in current directory" },
     { "-a", function() create_or_open_file() end, desc = "Create or open file" },
@@ -73,5 +72,7 @@ vim.keymap.set("n", "<leader>es", function() return ":split " .. file_dir() end,
 
 vim.keymap.set("n", "/", "<Plug>(easymotion-sn)", {desc = "Search in buffer", noremap = true})
 vim.keymap.set("o", "/", "<Plug>(easymotion-tn)", {desc = "Search in buffer", noremap = true})
+
+vim.keymap.set("n", "-", "<nop>", {desc = "Disable - key in normal mode"})
 
 whichKey.add(which_key_spec)
