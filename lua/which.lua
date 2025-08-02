@@ -59,11 +59,11 @@ local which_key_spec = {
     { "<leader>Gs", function() telescope.git_status() end, desc = "Git status" },
   }
 
---map <leader>cd :lcd %:p:h<CR>
-
 function file_dir()
     return vim.fn.expand("%:p:h") .. "/"
 end
+
+vim.keymap.set("n", "<leader>cd", function() return ":lcd " .. vim.fn.expand("%:p:h") .. "<CR>" end, {desc = "Change local directory", noremap = true, expr = true})
 
 vim.keymap.set("n", "<leader>ew", function() return ":ew " .. file_dir() end, {desc = "Edit path in same window", noremap = true, expr = true})
 vim.keymap.set("n", "<leader>et", function() return ":tabedit " .. file_dir() end, {desc = "Edit path in new tab", noremap = true, expr = true})
