@@ -1,5 +1,3 @@
-require("nvim-lsp-installer").setup {}
-
 local lspconfig = require("lspconfig")
 local gotoPreview = require("goto-preview")
 

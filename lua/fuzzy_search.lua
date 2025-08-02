@@ -45,14 +45,3 @@ require("telescope").setup {
   }
 }
 
-vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files hidden=true no_ignore=true<CR>")
-vim.keymap.set("n", "<leader>gg", "<cmd>Telescope git_files<CR>")
-vim.keymap.set("n", "<leader>bb", "<cmd>Telescope buffers<CR>")
-vim.keymap.set("n", "<leader>/", "<cmd>Telescope live_grep<CR>")
-vim.keymap.set("n", "<leader>*", "<cmd>Telescope grep_string<CR>")
-vim.keymap.set("n", "<leader>hc", "<cmd>Telescope commands<CR>")
-vim.keymap.set("n", "<leader>hh", "<cmd>Telescope help_tags<CR>")
-vim.keymap.set("n", "<leader>Gc", "<cmd>Telescope git_commits<CR>")
-vim.keymap.set("n", "<leader>GB", "<cmd>Telescope git_bcommits<CR>")
-vim.keymap.set("n", "<leader>Gb", "<cmd>Telescope git_branches<CR>")
-vim.keymap.set("n", "<leader>Gs", "<cmd>Telescope git_status<CR>")

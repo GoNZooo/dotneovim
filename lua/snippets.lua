@@ -1,6 +1,12 @@
 local ls = require("luasnip")
 
-require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets" })
+local snippet_path = "~/.config/nvim/snippets"
+-- set path to appropriate dir on windows
+if vim.fn.has("win64") == 1 then
+  snippet_path = "~/AppData/Local/nvim/snippets"
+end
+
+require("luasnip.loaders.from_lua").load({ paths = snippet_path })
 
 ls.config.set_config {
   -- Remember last snippet
